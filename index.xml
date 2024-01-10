@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future. on CYBERPARADISM</title>
+    <link>https://cyberparadism.github.io/</link>
+    <description>Recent content in Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future. on CYBERPARADISM</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 CYBERPARADISM</copyright>
+    <lastBuildDate>Mon, 13 Jun 2022 20:55:37 +0100</lastBuildDate><atom:link href="https://cyberparadism.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cyberparadism Manifesto</title>
+      <link>https://cyberparadism.github.io/manifesto/</link>
+      <pubDate>Wed, 19 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cyberparadism.github.io/manifesto/</guid>
+      <description>This is a web manifesto of the Cyberparadism aesthetic.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cyberparadism.github.io/manifesto/featured.jpg" />
+    </item>
+    
+  </channel>
+</rss>
