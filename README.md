@@ -2,7 +2,9 @@
 
 # Cyberparadism | Website
 
-This is the offical web presence of the Cyberparadism aesthetic that formerly originated on the Aesthetics Wiki. Cyberparadism is an aesthetics that typically depicts lush and untamed nature, wherein a small-numbered breakaway civilization uses advanced, but reasonably possible technology for self-preservation up to the point of luxurious comfort that enables them to live in a paradise, hence the name. Common themes are resource-based economy, genetic life engineering, terraformation, exoplanets or similar tropes of space frontier exploration.
+This is the offical [web presence](https://zarazinsfuss.github.io/cyberparadism/) of the Cyberparadism aesthetic that formerly originated on the Aesthetics Wiki. Cyberparadism is an aesthetics that typically depicts lush and untamed nature, wherein a small-numbered breakaway civilization uses advanced, but reasonably possible technology for self-preservation up to the point of luxurious comfort that enables them to live in a paradise, hence the name. Common themes are resource-based economy, genetic life engineering, terraformation, exoplanets or similar tropes of space frontier exploration.
+
+**Link to the website:** [🔗 CYBERPARADISM: A techno-optimist aesthetic guiding us towards a possible future. ](https://zarazinsfuss.github.io/cyberparadism/)
 
 ## Project Structure
 
