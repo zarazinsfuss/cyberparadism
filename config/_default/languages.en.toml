@@ -1,7 +1,7 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Cyberparadism"
+title = "CYBERPARADISM"
 
 [params]
   displayName = "EN"
@@ -10,14 +10,14 @@ title = "Cyberparadism"
   dateFormat = "2 January 2006"
   # logo = "img/logo.png"
   # secondaryLogo = "img/secondary-logo.png"
-  # description = "My awesome website"
+  description = "Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future."
   # copyright = "Copy, _right?_ :thinking_face:"
 
  [author]
-   name = "Cyberparadism"
-   image = "img/blowfish_logo.png"
-   headline = "I'm only human"
-   bio = "A little bit about you"
+   name = "CYBERPARADISM"
+   # image = "img/cyberparadism_emblem.png"
+   headline = "A techno-optimist aesthetic guiding us towards a possible future."
+   bio = "A techno-optimist aesthetic guiding us towards a possible future."
    links = [
 #     { email = "mailto:hello@your_domain.com" },
 #     { link = "https://link-to-some-website.com/" },
@@ -33,7 +33,7 @@ title = "Cyberparadism"
 #     { foursquare = "https://foursquare.com/username" },
      { github = "https://github.com/username" },
 #     { gitlab = "https://gitlab.com/username" },
-#     { google = "https://www.google.com/" },
+     { google = "https://www.google.com/search?q=cyberparadism" },
 #     { hashnode = "https://username.hashnode.dev" },
 #     { instagram = "https://instagram.com/username" },
 #     { keybase = "https://keybase.io/username" },
@@ -54,8 +54,8 @@ title = "Cyberparadism"
 #     { stack-overflow = "https://stackoverflow.com/users/userid/username" },
 #     { steam = "https://steamcommunity.com/profiles/userid" },
 #     { telegram = "https://t.me/username" },
-#     { tiktok = "https://tiktok.com/@username" },
-#     { tumblr = "https://username.tumblr.com" },
+     { tiktok = "https://www.tiktok.com/tag/cyberparadism" },
+     { tumblr = "https://www.tumblr.com/tagged/Cyberparadism?sort=top" },
 #     { twitch = "https://twitch.tv/username" },
 #     { twitter = "https://twitter.com/username" },
 #     { x-twitter = "https://twitter.com/username" },

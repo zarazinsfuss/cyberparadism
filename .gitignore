@@ -1,0 +1,5 @@
+node_modules
+resources/_gen/
+public
+.netlify
+.hugo_build.lock
