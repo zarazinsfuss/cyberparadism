@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>aesthetic on CYBERPARADISM</title>
-    <link>https://cyberparadism.github.io/tags/aesthetic/</link>
+    <link>https://zarazinsfuss.github.io/cyberparadism/tags/aesthetic/</link>
     <description>Recent content in aesthetic on CYBERPARADISM</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2024 CYBERPARADISM</copyright>
-    <lastBuildDate>Wed, 19 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://cyberparadism.github.io/tags/aesthetic/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zarazinsfuss.github.io/cyberparadism/tags/aesthetic/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cyberparadism Manifesto</title>
-      <link>https://cyberparadism.github.io/manifesto/</link>
+      <link>https://zarazinsfuss.github.io/cyberparadism/manifesto/</link>
       <pubDate>Wed, 19 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://cyberparadism.github.io/manifesto/</guid>
+      <guid>https://zarazinsfuss.github.io/cyberparadism/manifesto/</guid>
       <description>This is a web manifesto of the Cyberparadism aesthetic.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://cyberparadism.github.io/manifesto/featured.jpg" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://zarazinsfuss.github.io/cyberparadism/manifesto/featured.jpg" />
     </item>
     
   </channel>
