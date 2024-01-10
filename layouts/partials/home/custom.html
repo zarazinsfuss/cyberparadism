@@ -29,6 +29,7 @@
                         alt="{{ $.Site.Author.name | default " Author" }}" src="{{ $authorImage.RelPermalink }}" />
                     {{ end }}
                     {{ end }}
+                    {{ partial "icon" "cyberparadism"}}
                     <h1 class="mb-2 text-4xl font-extrabold text-neutral-800 dark:text-neutral-200">
                         {{ .Site.Author.name | default .Site.Title }}
                     </h1>
@@ -56,6 +57,9 @@
         </div>
     </div>
 </article>
+<section>
+    {{ partial "featured/main.html" . }}
+</section>
 <section>
     {{ partial "recent-articles/main.html" . }}
 </section>
