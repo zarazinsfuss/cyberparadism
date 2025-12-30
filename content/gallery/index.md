@@ -32,6 +32,16 @@ description = "Technologies that exemplify responsible innovation for human flou
 src = "img/gallery/further_resources_cyberparadism_banner.avif"
 title = "Further Resources"
 description = "Pathways to explore and contribute to the Cyberparadism vision"
+
+[[extra.images]]
+src = "img/gallery/lagoon-enclave.avif"
+title = "Lagoon Enclave"
+description = "A serene settlement nestled within tropical waters"
+
+[[extra.images]]
+src = "img/gallery/valley-of-quiet.avif"
+title = "Valley of Quiet"
+description = "Peaceful habitation amidst dramatic natural landscape"
 +++
 
 A curated collection of visuals that embody the Cyberparadism aesthetic — where technology enhances rather than replaces the natural world, and where humanity's ingenuity serves to create abundance and beauty for all.
