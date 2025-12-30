@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+
+{% block body_class %}gallery{% endblock body_class %}
+
+{% block content %}
+<main class="gallery-main">
+    {% if page.extra.show_hero | default(value=false) and page.extra.hero_image %}
+    <!-- Fixed background image -->
+    <div class="hero-background">
+        <img src="{{ get_url(path=page.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation">
+        <div class="hero-gradient"></div>
+        <div class="hero-gradient-overlay"></div>
+    </div>
+    {% endif %}
+
+    <div class="gallery-container">
+        <header class="gallery-header">
+            <h1 class="page-title">{{ page.title }}</h1>
+            {% if page.description %}
+            <p class="gallery-description">{{ page.description }}</p>
+            {% endif %}
+        </header>
+
+        {% if page.content %}
+        <div class="gallery-intro prose">
+            {{ page.content | safe }}
+        </div>
+        {% endif %}
+
+        {% if page.extra.images %}
+        <div class="gallery-grid">
+            {% for image in page.extra.images %}
+            <button class="gallery-item" data-index="{{ loop.index0 }}" aria-label="View {{ image.title }}">
+                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}" loading="lazy">
+                <div class="gallery-caption">
+                    <h3>{{ image.title }}</h3>
+                    {% if image.description %}
+                    <p>{{ image.description }}</p>
+                    {% endif %}
+                </div>
+            </button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close lightbox">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="lightbox-content">
+            <img class="lightbox-image" src="" alt="" id="lightbox-image">
+            <div class="lightbox-info" id="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+            </div>
+        </div>
+
+        <button class="lightbox-nav lightbox-next" aria-label="Next image">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+</main>
+
+<script>
+(function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // Image data from template
+    const images = [
+        {% for image in page.extra.images %}
+        {
+            src: "{{ get_url(path=image.src, trailing_slash=false) }}",
+            title: "{{ image.title }}",
+            description: "{{ image.description | default(value='') }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+        const image = images[currentIndex];
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.title;
+        lightboxTitle.textContent = image.title;
+        lightboxDescription.textContent = image.description;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightbox();
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightbox();
+    }
+
+    // Gallery item clicks
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const index = parseInt(item.dataset.index);
+            openLightbox(index);
+        });
+    });
+
+    // Close button
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+
+    // Navigation buttons
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+    lightbox.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+    // Click outside to close
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Touch swipe support
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextImage();
+            else prevImage();
+        }
+    }, { passive: true });
+})();
+</script>
+{% endblock content %}

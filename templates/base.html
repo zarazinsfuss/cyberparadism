@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+
+    <!-- Feeds -->
+    {% if config.generate_feeds %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+    {% endif %}
+
+    <!-- Fonts -->
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ get_url(path="favicon.ico", trailing_slash=false) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="img/favicon-32.png", trailing_slash=false) }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="img/favicon-16.png", trailing_slash=false) }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="img/apple-touch-icon.png", trailing_slash=false) }}">
+    <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
+    <meta name="theme-color" content="#06b6d4">
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+    <!-- Background blur overlay -->
+    <div id="background-blur" class="background-blur"></div>
+
+    {% block content %}{% endblock content %}
+
+    <!-- Scroll to top button -->
+    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>This work is in the public domain</p>
+            <p class="license">Content available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">Creative Commons</a> license</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Background blur on scroll
+            const backgroundBlur = document.getElementById('background-blur');
+            const scrollTopBtn = document.getElementById('scroll-top');
+
+            // Throttle function for performance
+            function throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                }
+            }
+
+            // Scroll effects
+            function handleScroll() {
+                const scroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+                // Background blur
+                if (backgroundBlur) {
+                    backgroundBlur.style.opacity = Math.min(scroll / 300, 1);
+                }
+
+                // Scroll to top button visibility
+                if (scrollTopBtn) {
+                    if (scroll > 400) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', throttle(handleScroll, 16));
+
+            // Scroll to top functionality
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // TOC Active Section Tracking
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            const headings = [];
+
+            if (tocLinks.length > 0) {
+                // Collect all headings that have corresponding TOC links
+                tocLinks.forEach(function(link) {
+                    const href = link.getAttribute('href');
+                    if (href) {
+                        const id = href.split('#')[1];
+                        if (id) {
+                            const heading = document.getElementById(id);
+                            if (heading) {
+                                headings.push({ id: id, element: heading, link: link });
+                            }
+                        }
+                    }
+                });
+
+                function updateActiveLink() {
+                    const scrollPos = window.scrollY + 120; // Offset for better UX
+                    let activeHeading = null;
+
+                    // Find the current heading
+                    for (let i = headings.length - 1; i >= 0; i--) {
+                        if (headings[i].element.offsetTop <= scrollPos) {
+                            activeHeading = headings[i];
+                            break;
+                        }
+                    }
+
+                    // Update active states
+                    tocLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                    });
+
+                    if (activeHeading) {
+                        activeHeading.link.classList.add('active');
+
+                        // Also highlight parent if this is a nested item
+                        const parentLi = activeHeading.link.closest('ul')?.closest('li');
+                        if (parentLi) {
+                            const parentLink = parentLi.querySelector(':scope > a');
+                            if (parentLink && parentLink !== activeHeading.link) {
+                                // Don't override if active link is the parent
+                            }
+                        }
+                    }
+                }
+
+                window.addEventListener('scroll', throttle(updateActiveLink, 50));
+                updateActiveLink(); // Initial call
+            }
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.length > 1) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            history.pushState(null, null, href);
+                        }
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

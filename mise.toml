@@ -1,0 +1,18 @@
+[tools]
+zola = "latest"
+
+[tasks.build]
+description = "Build the Zola site"
+run = "zola build"
+
+[tasks.serve]
+description = "Serve the site locally with live reload"
+run = "zola serve"
+
+[tasks.check]
+description = "Check for broken links and other issues"
+run = "zola check"
+
+[tasks.clean]
+description = "Clean the public directory"
+run = "rm -rf public"

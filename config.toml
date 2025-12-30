@@ -1,0 +1,51 @@
+# Zola configuration for Cyberparadism
+
+base_url = "https://zarazinsfuss.github.io/cyberparadism"
+title = "CYBERPARADISM"
+description = "Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future."
+default_language = "en"
+
+# Compilation settings
+compile_sass = true
+minify_html = true
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+[markdown]
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+extra_syntaxes_and_themes = []
+smart_punctuation = true
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+
+[extra]
+author = "CYBERPARADISM"
+author_headline = "A techno-optimist aesthetic guiding us towards a possible future."
+hero_image = "img/cyberparadism_hero_2.avif"
+
+# Social links
+[[extra.social]]
+name = "github"
+url = "https://github.com/zarazinsfuss/cyberparadism"
+
+[[extra.social]]
+name = "tumblr"
+url = "https://www.tumblr.com/tagged/Cyberparadism?sort=top"
+
+[[extra.social]]
+name = "tiktok"
+url = "https://www.tiktok.com/tag/cyberparadism"
+
+[[taxonomies]]
+name = "tags"

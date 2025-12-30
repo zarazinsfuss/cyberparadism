@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+
+{% block body_class %}page{% endblock body_class %}
+
+{% block content %}
+<main class="page-main">
+    {% if page.extra.show_hero | default(value=false) and page.extra.featured_image %}
+    <!-- Fixed background image like homepage -->
+    <div class="hero-background">
+        <img src="{{ get_url(path=page.extra.featured_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation">
+        <div class="hero-gradient"></div>
+        <div class="hero-gradient-overlay"></div>
+    </div>
+    {% endif %}
+
+    <div class="page-layout">
+        <!-- Main content area -->
+        <article class="page-content">
+            <header class="page-header">
+                <h1 class="page-title">{{ page.title }}</h1>
+                <div class="article-meta">
+                    <span>{{ page.word_count }} words</span>
+                    <span>{{ page.reading_time }} min read</span>
+                </div>
+            </header>
+
+            <div class="prose">
+                {{ page.content | safe }}
+            </div>
+
+            {% if page.taxonomies.tags %}
+            <div class="tags">
+                {% for tag in page.taxonomies.tags %}
+                <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" class="tag">{{ tag }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Page navigation -->
+            <nav class="page-nav">
+                {% if page.lower %}
+                <a href="{{ page.lower.permalink }}" class="page-nav-link page-nav-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span class="page-nav-text">
+                        <span class="page-nav-label">Previous</span>
+                        <span class="page-nav-title">{{ page.lower.title }}</span>
+                    </span>
+                </a>
+                {% else %}
+                <span class="page-nav-link page-nav-disabled"></span>
+                {% endif %}
+
+                <a href="{{ config.base_url }}" class="page-nav-home" aria-label="Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </a>
+
+                {% if page.higher %}
+                <a href="{{ page.higher.permalink }}" class="page-nav-link page-nav-next">
+                    <span class="page-nav-text">
+                        <span class="page-nav-label">Next</span>
+                        <span class="page-nav-title">{{ page.higher.title }}</span>
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                {% else %}
+                <span class="page-nav-link page-nav-disabled"></span>
+                {% endif %}
+            </nav>
+        </article>
+
+        <!-- Sticky sidebar TOC -->
+        {% if page.extra.show_toc | default(value=false) and page.toc %}
+        <aside class="toc-sidebar">
+            <nav class="toc-nav">
+                <h2 class="toc-title">On this page</h2>
+                <ul class="toc-list">
+                    {% for h2 in page.toc %}
+                    <li>
+                        <a href="{{ h2.permalink }}">{{ h2.title }}</a>
+                        {% if h2.children %}
+                        <ul>
+                            {% for h3 in h2.children %}
+                            <li><a href="{{ h3.permalink }}">{{ h3.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </aside>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}

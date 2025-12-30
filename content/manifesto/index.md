@@ -1,16 +1,17 @@
----
-title: "Cyberparadism Manifesto"
-date: 2022-01-19
-featured: true
-description: "This is a web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the Aesthetics Wiki where it got formalized for the first time and is an aesthetic that celebrates the positive potential of technology and scientific progress to create a better future for humanity."
-tags: ["aesthetic", "basics"]
-showAuthor: false
-showDate: false
-showTableOfContents: true
-showHero: true
-heroStyle: background
-layoutBackgroundBlur: true
----
++++
+title = "Cyberparadism Manifesto"
+date = 2022-01-19
+description = "This is a web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the Aesthetics Wiki where it got formalized for the first time and is an aesthetic that celebrates the positive potential of technology and scientific progress to create a better future for humanity."
+
+[taxonomies]
+tags = ["aesthetic", "basics"]
+
+[extra]
+featured = true
+featured_image = "img/manifesto-featured.avif"
+show_toc = true
+show_hero = true
++++
 
 This is a web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the [Aesthetics Wiki](https://aesthetics.fandom.com/wiki/Cyberparadism) where it got formalized for the first time and is an aesthetic that celebrates the positive potential of technology and scientific progress to create a better future for humanity. At its core, Cyberparadism is about using technology to enhance the human experience, promote sustainability, and foster a sense of collective purpose and responsibility.
 
@@ -26,7 +27,7 @@ As an aesthetic, Cyberparadism offers a framework for exploring the potential of
 
 We believe that technology can be a powerful force for good, when used in a responsible and thoughtful way. By harnessing the power of technology, we can create a world of abundance and prosperity, where all individuals have the opportunity to thrive and reach their full potential.
 
-At the heart of Cyberparadism is a commitment to preservation and embetterment of life through the keen pursuit of science and the positive use of technology. We recognize that our current economic and social order needs to adapt, and that we must embrace new approaches to democratize a pristine way of life. 
+At the heart of Cyberparadism is a commitment to preservation and embetterment of life through the keen pursuit of science and the positive use of technology. We recognize that our current economic and social order needs to adapt, and that we must embrace new approaches to democratize a pristine way of life.
 
 We believe that the future of technology lies not in the pursuit of profit or power, but in the pursuit of a higher purpose. Through the responsible use of technology, we can create a world where abundance and prosperity are available to all, where we live in harmony with nature, and where we work together to achieve shared goals.
 
@@ -125,7 +126,7 @@ Rooted in its formalization on the Aesthetics Wiki, the [Cyberparadism entry](ht
 
 ### Social Media presence
 
-Furhter places to look for the expression of Cyberparadism is on various social media platforms. The following platforms provide the possibility to inspect content tagged with `#cyberparadism`:
+Further places to look for the expression of Cyberparadism is on various social media platforms. The following platforms provide the possibility to inspect content tagged with `#cyberparadism`:
 
 - [Tumblr](https://www.tumblr.com/tagged/Cyberparadism?sort=top)
 - [TikTok](https://www.tiktok.com/tag/cyberparadism)
@@ -141,4 +142,4 @@ List of related concepts and ideas for further exploration:
 
 ### The Techno-Optimist Manifesto
 
-The [Techno-Optimist Manifesto](https://a16z.com/the-techno-optimist-manifesto/) was published on the October 16, 2023 by Marc Andreessen and focuses on the positive impacts of technology on civilization. It counters negative views about technology, emphasizing that technology is the main driver of growth, progress, and improvement in human well-being. It asserts that technology is essential for solving material problems and creating abundance, and is the perpetual source of growth. The manifesto encourages optimism about technological advancements and their ability to solve real-world problems, which is **very reminiscient of the Cyberparadism Manifesto.** Go check it out.
+The [Techno-Optimist Manifesto](https://a16z.com/the-techno-optimist-manifesto/) was published on the October 16, 2023 by Marc Andreessen and focuses on the positive impacts of technology on civilization. It counters negative views about technology, emphasizing that technology is the main driver of growth, progress, and improvement in human well-being. It asserts that technology is essential for solving material problems and creating abundance, and is the perpetual source of growth. The manifesto encourages optimism about technological advancements and their ability to solve real-world problems, which is **very reminiscent of the Cyberparadism Manifesto.** Go check it out.

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ term.name | title }} | {{ config.title }}{% endblock title %}
+
+{% block body_class %}taxonomy-single{% endblock body_class %}
+
+{% block content %}
+<main class="section-main">
+    <header class="section-header">
+        <h1 class="section-title">{{ term.name }}</h1>
+        <p class="section-description">{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</p>
+    </header>
+
+    <div class="posts-list">
+        {% for page in term.pages %}
+        <article class="post-card">
+            <a href="{{ page.permalink }}">
+                <h2>{{ page.title }}</h2>
+                {% if page.description %}
+                <p>{{ page.description }}</p>
+                {% endif %}
+                <div class="article-meta">
+                    {% if page.date %}
+                    <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">
+                        {{ page.date | date(format="%B %d, %Y") }}
+                    </time>
+                    {% endif %}
+                    <span>{{ page.word_count }} words</span>
+                    <span>{{ page.reading_time }} min read</span>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+</main>
+{% endblock content %}

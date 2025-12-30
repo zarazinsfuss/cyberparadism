@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title | default(value=config.title) }}{% endblock title %}
+{% block description %}{{ section.description | default(value=config.description) }}{% endblock description %}
+
+{% block body_class %}section{% endblock body_class %}
+
+{% block content %}
+<main class="section-main">
+    <header class="section-header">
+        <h1 class="section-title">{{ section.title }}</h1>
+        {% if section.description %}
+        <p class="section-description">{{ section.description }}</p>
+        {% endif %}
+    </header>
+
+    {% if section.content %}
+    <div class="section-content prose">
+        {{ section.content | safe }}
+    </div>
+    {% endif %}
+
+    {% if section.pages %}
+    <div class="posts-list">
+        {% for page in section.pages %}
+        <article class="post-card">
+            <a href="{{ page.permalink }}">
+                <h2>{{ page.title }}</h2>
+                {% if page.description %}
+                <p>{{ page.description }}</p>
+                {% endif %}
+                <div class="article-meta">
+                    {% if page.date %}
+                    <time datetime="{{ page.date | date(format="%Y-%m-%d") }}">
+                        {{ page.date | date(format="%B %d, %Y") }}
+                    </time>
+                    {% endif %}
+                    <span>{{ page.word_count }} words</span>
+                    <span>{{ page.reading_time }} min read</span>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if section.subsections %}
+    <div class="subsections">
+        {% for subsection_path in section.subsections %}
+        {% set subsection = get_section(path=subsection_path) %}
+        <a href="{{ subsection.permalink }}" class="subsection-link">
+            {{ subsection.title }}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</main>
+{% endblock content %}

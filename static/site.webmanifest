@@ -1,0 +1,21 @@
+{
+  "name": "CYBERPARADISM",
+  "short_name": "Cyberparadism",
+  "description": "A techno-optimist aesthetic guiding us towards a possible future.",
+  "start_url": "/cyberparadism/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
