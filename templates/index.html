@@ -67,6 +67,32 @@
     </section>
     {% endif %}
 
+    <!-- Articles section -->
+    {% set articles_section = get_section(path="articles/_index.md") %}
+    {% if articles_section and articles_section.pages %}
+    <section class="articles-section">
+        <h2 class="section-title">Articles</h2>
+        <p class="section-description">Community-contributed explorations of Cyberparadism</p>
+        <div class="articles-grid">
+            {% for article in articles_section.pages %}
+            <a href="{{ article.permalink }}" class="article-card">
+                {% if article.extra.featured_image %}
+                <img src="{{ get_url(path=article.extra.featured_image, trailing_slash=false) }}" alt="{{ article.title }}" class="article-card-image">
+                {% endif %}
+                <div class="article-card-content">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.description }}</p>
+                    <div class="article-meta">
+                        {% if article.extra.author %}<span>{{ article.extra.author }}</span>{% endif %}
+                        <span>{{ article.reading_time }} min read</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
     <!-- Gallery section -->
     {% set gallery = get_page(path="gallery/index.md") %}
     {% if gallery and gallery.extra.images %}
