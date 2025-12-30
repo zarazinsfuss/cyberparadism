@@ -1,0 +1,93 @@
+name: Article Submission
+description: Submit an article for the Cyberparadism website
+title: "[Article] "
+labels: ["article", "contribution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to Cyberparadism! Please fill out the form below to submit your article.
+
+        Your article should explore some aspect of Cyberparadism — its aesthetics, philosophy, visual language, related concepts, or vision for a harmonious future.
+
+  - type: input
+    id: title
+    attributes:
+      label: Article Title
+      description: The title of your article
+      placeholder: "e.g., The Architecture of Cyberparadism"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short Description
+      description: A brief description of your article (1-2 sentences, will appear on the article card)
+      placeholder: "e.g., An exploration of architectural principles in Cyberparadism aesthetics."
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Article Content
+      description: |
+        The full content of your article in Markdown format.
+
+        Tips:
+        - Use ## for main headings and ### for subheadings
+        - Use **bold** and *italic* for emphasis
+        - Use > for blockquotes
+        - Use - or * for bullet lists
+      placeholder: |
+        ## Introduction
+
+        Your article content here...
+
+        ## Main Section
+
+        More content...
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author Name
+      description: How you'd like to be credited (username, name, or pseudonym)
+      placeholder: "e.g., zarazinsfuss"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tags
+    attributes:
+      label: Suggested Tags
+      description: Comma-separated tags that describe your article
+      placeholder: "e.g., architecture, visual language, philosophy"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: license
+    attributes:
+      label: License Agreement
+      description: All contributions must be licensed under Creative Commons CC0 (public domain)
+      options:
+        - I agree to release this article under CC0 (public domain)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: guidelines
+    attributes:
+      label: Submission Guidelines
+      description: Please confirm the following
+      options:
+        - label: This is original content or properly attributed
+          required: true
+        - label: The article relates to Cyberparadism aesthetics
+          required: true
+        - label: I have proofread the article for errors
+          required: true
