@@ -44,38 +44,15 @@
         </div>
     </section>
 
-    <!-- Featured section -->
-    {% set manifesto = get_page(path="manifesto/index.md") %}
-    {% if manifesto %}
-    <section class="featured-section">
-        <h2 class="section-title">Featured</h2>
-        <div class="featured-grid">
-            <a href="{{ manifesto.permalink }}" class="featured-card">
-                {% if manifesto.extra.featured_image %}
-                <img src="{{ get_url(path=manifesto.extra.featured_image, trailing_slash=false) }}" alt="{{ manifesto.title }}" class="featured-image">
-                {% endif %}
-                <div class="featured-card-content">
-                    <h3>{{ manifesto.title }}</h3>
-                    <p>{{ manifesto.description }}</p>
-                    <div class="article-meta">
-                        <span>{{ manifesto.word_count }} words</span>
-                        <span>{{ manifesto.reading_time }} min read</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-    {% endif %}
-
     <!-- Articles section -->
     {% set articles_section = get_section(path="articles/_index.md") %}
     {% if articles_section and articles_section.pages %}
     <section class="articles-section">
         <h2 class="section-title">Articles</h2>
-        <p class="section-description">Community-contributed explorations of Cyberparadism</p>
+        <p class="section-description">Explorations of Cyberparadism</p>
         <div class="articles-grid">
             {% for article in articles_section.pages %}
-            <a href="{{ article.permalink }}" class="article-card">
+            <a href="{{ article.permalink }}" class="article-card {% if article.extra.featured %}featured{% endif %}">
                 {% if article.extra.featured_image %}
                 <img src="{{ get_url(path=article.extra.featured_image, trailing_slash=false) }}" alt="{{ article.title }}" class="article-card-image">
                 {% endif %}

@@ -555,6 +555,11 @@ a {
   @include glass-card;
   transition: all var(--transition-smooth);
 
+  &.featured {
+    border-color: rgba(var(--color-primary-400), 0.3);
+    box-shadow: 0 8px 32px rgba(var(--color-primary-500), 0.1);
+  }
+
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 48px rgba(var(--color-primary-500), 0.12);

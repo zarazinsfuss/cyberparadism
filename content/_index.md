@@ -10,8 +10,8 @@ This is the official web presence of the Cyberparadism aesthetic that formerly o
   <span class="cta-icon">&#9733;</span>
   <div class="cta-content">
     <span>Do you want to submit your <code>article</code> to be published here?</span>
-    <a href="https://github.com/zarazinsfuss/cyberparadism" target="_blank" class="cta-button">Submit</a>
+    <a href="https://github.com/zarazinsfuss/cyberparadism/issues/new?template=article-submission.yml" target="_blank" class="cta-button">Submit</a>
   </div>
 </div>
 
-It's best if you start by exploring the [Manifesto](@/manifesto/index.md) first to get a feel for what Cyberparadism actually tries to be. If you like what you see, check out the project on [Github](https://github.com/zarazinsfuss/cyberparadism) and contribute your own ideas to it.
+It's best if you start by exploring the [Manifesto](@/articles/manifesto.md) first to get a feel for what Cyberparadism actually tries to be. If you like what you see, check out the project on [Github](https://github.com/zarazinsfuss/cyberparadism) and contribute your own ideas to it.

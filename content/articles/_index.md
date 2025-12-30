@@ -1,7 +1,7 @@
 +++
 title = "Articles"
 description = "Community-contributed articles exploring Cyberparadism"
-sort_by = "date"
+sort_by = "weight"
 template = "section.html"
 
 [extra]

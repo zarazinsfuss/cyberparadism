@@ -2,6 +2,7 @@
 title = "What is Cyberparadism?"
 description = "An encyclopedic overview of Cyberparadism as a techno-optimist aesthetic."
 date = 2025-12-30
+weight = 10
 
 [taxonomies]
 tags = ["aesthetic", "basics", "overview"]

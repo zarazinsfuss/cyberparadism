@@ -1,6 +1,7 @@
 +++
 title = "Cyberparadism Manifesto"
 date = 2022-01-19
+weight = 1
 description = "This is a web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the Aesthetics Wiki where it got formalized for the first time and is an aesthetic that celebrates the positive potential of technology and scientific progress to create a better future for humanity."
 
 [taxonomies]
@@ -11,6 +12,7 @@ featured = true
 featured_image = "img/manifesto-featured.avif"
 show_toc = true
 show_hero = true
+author = "zarazinsfuss"
 +++
 
 This is a web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the [Aesthetics Wiki](https://aesthetics.fandom.com/wiki/Cyberparadism) where it got formalized for the first time and is an aesthetic that celebrates the positive potential of technology and scientific progress to create a better future for humanity. At its core, Cyberparadism is about using technology to enhance the human experience, promote sustainability, and foster a sense of collective purpose and responsibility.
@@ -87,7 +89,7 @@ These Laws of Cyberparadism represent the guiding lights of the aesthetic of the
 
 > "Often people, especially computer engineers, focus on the machines. They think, "By doing this, the machine will run fast. By doing this, the machine will run more effectively. By doing this, the machine will something something something." They are focusing on machines. But in fact we need to focus on humans, on how humans care about doing programming or operating the application of the machines. We are the masters. They are the slaves."
 >
-> — 松本 行弘 (Yukihiro Matsumoto)
+> — Yukihiro Matsumoto
 
 As we embark on this speculative journey, it is important to explore the signs and manifestations of Cyberparadism in the form of innovative technologies that align with its principles. These technologies exemplify the responsible use of technology to enhance the human experience, promote untamed continuity of life, and foster a sense of collective purpose and responsibility. Let us delve into some key signs of Cyberparadism:
 
