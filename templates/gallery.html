@@ -122,6 +122,13 @@
             {% endfor %}
         </div>
         {% endif %}
+
+        <!-- Home navigation -->
+        <nav class="gallery-nav" aria-label="Gallery navigation">
+            <a href="{{ config.base_url }}" class="page-nav-home" aria-label="Return to homepage">
+                <img src="{{ get_url(path='img/cyberparadism-icon.avif', trailing_slash=false) }}" alt="Cyberparadism" class="nav-home-icon" aria-hidden="true">
+            </a>
+        </nav>
     </div>
 
     <!-- Lightbox -->
