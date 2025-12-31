@@ -9,31 +9,6 @@ show_hero = true
 hero_image = "img/cyberparadism_hero_2.avif"
 
 [[extra.images]]
-src = "img/gallery/cyberparadism_hero.avif"
-title = "Cyber Paradise"
-description = "A vision of technological harmony amidst lush, untamed nature"
-
-[[extra.images]]
-src = "img/gallery/cyberparadism_hero2.avif"
-title = "Eden Reborn"
-description = "Advanced civilization thriving in symbiosis with the natural world"
-
-[[extra.images]]
-src = "img/gallery/the_laws_of_cyberparadism_banner.avif"
-title = "The Laws of Cyberparadism"
-description = "Guiding principles for a harmonious future of technology and nature"
-
-[[extra.images]]
-src = "img/gallery/the_signs_of_cyberparadism_banner.avif"
-title = "The Signs of Cyberparadism"
-description = "Technologies that exemplify responsible innovation for human flourishing"
-
-[[extra.images]]
-src = "img/gallery/further_resources_cyberparadism_banner.avif"
-title = "Further Resources"
-description = "Pathways to explore and contribute to the Cyberparadism vision"
-
-[[extra.images]]
 src = "img/gallery/lagoon-enclave.avif"
 title = "Lagoon Enclave"
 description = "A serene settlement nestled within tropical waters"
@@ -42,6 +17,21 @@ description = "A serene settlement nestled within tropical waters"
 src = "img/gallery/valley-of-quiet.avif"
 title = "Valley of Quiet"
 description = "Peaceful habitation amidst dramatic natural landscape"
+
+[[extra.images]]
+src = "img/gallery/atrium-of-living-light.avif"
+title = "Atrium of Living Light"
+description = "A luminous sanctuary where nature and architecture intertwine"
+
+[[extra.images]]
+src = "img/gallery/cloudpiercer-dock.avif"
+title = "Cloudpiercer Dock"
+description = "An elevated platform reaching into the skies above verdant canopy"
+
+[[extra.images]]
+src = "img/gallery/the-halo-atoll.avif"
+title = "The Halo Atoll"
+description = "A ring-shaped haven embracing crystalline waters"
 +++
 
 A curated collection of visuals that embody the Cyberparadism aesthetic — where technology enhances rather than replaces the natural world, and where humanity's ingenuity serves to create abundance and beauty for all.
