@@ -9,7 +9,7 @@ tags = ["aesthetic", "basics", "overview"]
 
 [extra]
 featured = true
-featured_image = "img/gallery/cyberparadism_hero.avif"
+featured_image = "img/gallery/changi-interface.avif"
 show_toc = true
 show_hero = true
 author = "zarazinsfuss"
