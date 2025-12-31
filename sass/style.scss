@@ -74,6 +74,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgb(var(--color-primary-600));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  z-index: 9999;
+  font-weight: 500;
+  text-decoration: none;
+  transition: top var(--transition-base);
+
+  &:focus {
+    top: 1rem;
+    outline: 2px solid rgb(var(--color-primary-400));
+    outline-offset: 2px;
+  }
+}
+
 // Selection
 ::selection {
   background-color: rgba(var(--color-primary-400), 0.3);

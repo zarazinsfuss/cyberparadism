@@ -3,39 +3,39 @@
 {% block body_class %}home{% endblock body_class %}
 
 {% block content %}
-<main class="home-main">
+<div class="home-main">
     <!-- Hero background -->
-    <div class="hero-background">
-        <img src="{{ get_url(path=config.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation">
-        <div class="hero-gradient"></div>
-        <div class="hero-gradient-overlay"></div>
+    <div class="hero-background" role="presentation">
+        <img src="{{ get_url(path=config.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation" aria-hidden="true">
+        <div class="hero-gradient" aria-hidden="true"></div>
+        <div class="hero-gradient-overlay" aria-hidden="true"></div>
     </div>
 
     <!-- Profile section -->
-    <section class="profile-section">
+    <section class="profile-section" aria-labelledby="site-title">
         <div class="profile-content">
             <!-- Cyberparadism emblem -->
             <div class="emblem">
-                <img src="{{ get_url(path="img/cyberparadism-icon.avif", trailing_slash=false) }}" alt="Cyberparadism emblem" class="emblem-icon">
+                <img src="{{ get_url(path="img/cyberparadism-icon.avif", trailing_slash=false) }}" alt="Cyberparadism emblem - stylized icon representing technological harmony with nature" class="emblem-icon">
             </div>
 
-            <h1 class="site-title">{{ config.extra.author }}</h1>
+            <h1 class="site-title" id="site-title">{{ config.extra.author }}</h1>
             <h2 class="site-headline">{{ config.extra.author_headline }}</h2>
 
             <!-- Social links -->
-            <div class="social-links">
+            <nav class="social-links" aria-label="Social media links">
                 {% for link in config.extra.social %}
-                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ link.name }}" class="social-link">
+                <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" aria-label="Visit {{ config.extra.author }} on {{ link.name | capitalize }}" class="social-link">
                     {% if link.name == "github" %}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     {% elif link.name == "tumblr" %}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.167z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.167z"/></svg>
                     {% elif link.name == "tiktok" %}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                     {% endif %}
                 </a>
                 {% endfor %}
-            </div>
+            </nav>
 
             <!-- Main content -->
             <div class="home-content prose">
@@ -47,14 +47,14 @@
     <!-- Articles section -->
     {% set articles_section = get_section(path="articles/_index.md") %}
     {% if articles_section and articles_section.pages %}
-    <section class="articles-section">
-        <h2 class="section-title">Articles</h2>
+    <section class="articles-section" aria-labelledby="articles-heading">
+        <h2 class="section-title" id="articles-heading">Articles</h2>
         <p class="section-description">Explorations of Cyberparadism</p>
-        <div class="articles-grid">
+        <div class="articles-grid" role="list">
             {% for article in articles_section.pages %}
-            <a href="{{ article.permalink }}" class="article-card {% if article.extra.featured %}featured{% endif %}">
+            <a href="{{ article.permalink }}" class="article-card {% if article.extra.featured %}featured{% endif %}" role="listitem" aria-label="Read article: {{ article.title }}">
                 {% if article.extra.featured_image %}
-                <img src="{{ get_url(path=article.extra.featured_image, trailing_slash=false) }}" alt="{{ article.title }}" class="article-card-image">
+                <img src="{{ get_url(path=article.extra.featured_image, trailing_slash=false) }}" alt="" class="article-card-image" aria-hidden="true">
                 {% endif %}
                 <div class="article-card-content">
                     <h3>{{ article.title }}</h3>
@@ -73,24 +73,24 @@
     <!-- Gallery section -->
     {% set gallery = get_page(path="gallery/index.md") %}
     {% if gallery and gallery.extra.images %}
-    <section class="gallery-section">
-        <h2 class="section-title">Gallery</h2>
+    <section class="gallery-section" aria-labelledby="gallery-heading">
+        <h2 class="section-title" id="gallery-heading">Gallery</h2>
         <p class="section-description">Visual explorations of Cyberparadism</p>
-        <div class="gallery-preview">
+        <div class="gallery-preview" role="list" aria-label="Gallery preview">
             {% for image in gallery.extra.images | slice(end=4) %}
-            <div class="gallery-preview-item">
-                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}" loading="lazy">
+            <div class="gallery-preview-item" role="listitem">
+                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}{% if image.description %} - {{ image.description }}{% endif %}" loading="lazy">
             </div>
             {% endfor %}
         </div>
-        <a href="{{ gallery.permalink }}" class="gallery-link">
+        <a href="{{ gallery.permalink }}" class="gallery-link" aria-label="View full gallery of Cyberparadism images">
             View full gallery
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
         </a>
     </section>
     {% endif %}
-</main>
+</div>
 {% endblock content %}

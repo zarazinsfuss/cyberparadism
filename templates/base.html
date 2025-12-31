@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html lang="{{ lang }}" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="title" content="{% block meta_title %}{{ config.title }}{% endblock meta_title %}">
     <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+    <meta name="keywords" content="{% block keywords %}cyberparadism, techno-optimism, futurism, aesthetic, solarpunk, post-cyberpunk, technology, nature, harmony, abundance{% endblock keywords %}">
+    <meta name="author" content="{{ config.extra.author }}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{% block canonical %}{{ config.base_url }}{% endblock canonical %}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
+    <meta property="og:url" content="{% block og_url %}{{ config.base_url }}{% endblock og_url %}">
+    <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
+    <meta property="og:image" content="{% block og_image %}{{ config.base_url }}/img/cyberparadism_hero_2.avif{% endblock og_image %}">
+    <meta property="og:site_name" content="{{ config.title }}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{% block twitter_url %}{{ config.base_url }}{% endblock twitter_url %}">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ config.title }}{% endblock twitter_title %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock twitter_description %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ config.base_url }}/img/cyberparadism_hero_2.avif{% endblock twitter_image %}">
 
     <!-- Feeds -->
     {% if config.generate_feeds %}
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ config.title }}" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
     {% endif %}
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
 
     <!-- Styles -->
@@ -24,25 +48,83 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="img/apple-touch-icon.png", trailing_slash=false) }}">
     <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
     <meta name="theme-color" content="#06b6d4">
+
+    <!-- JSON-LD Structured Data for AI/LLM and Search Engines -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "{{ config.base_url }}/#website",
+                "url": "{{ config.base_url }}",
+                "name": "{{ config.title }}",
+                "description": "{{ config.description }}",
+                "inLanguage": "en-US",
+                "publisher": {
+                    "@id": "{{ config.base_url }}/#organization"
+                }
+            },
+            {
+                "@type": "Organization",
+                "@id": "{{ config.base_url }}/#organization",
+                "name": "{{ config.extra.author }}",
+                "url": "{{ config.base_url }}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{ config.base_url }}/img/icon-512.png",
+                    "width": 512,
+                    "height": 512
+                },
+                "description": "{{ config.extra.author_headline }}",
+                "sameAs": [
+                    "https://github.com/zarazinsfuss/cyberparadism",
+                    "https://www.tumblr.com/tagged/Cyberparadism",
+                    "https://www.tiktok.com/tag/cyberparadism",
+                    "https://personal-aesthetics.fandom.com/wiki/Cyberparadism"
+                ]
+            },
+            {
+                "@type": "WebPage",
+                "@id": "{% block page_id %}{{ config.base_url }}/#webpage{% endblock page_id %}",
+                "url": "{% block page_url %}{{ config.base_url }}{% endblock page_url %}",
+                "name": "{% block page_name %}{{ config.title }}{% endblock page_name %}",
+                "description": "{% block page_description %}{{ config.description }}{% endblock page_description %}",
+                "isPartOf": {
+                    "@id": "{{ config.base_url }}/#website"
+                },
+                "inLanguage": "en-US"
+            }
+            {% block jsonld_extra %}{% endblock jsonld_extra %}
+        ]
+    }
+    </script>
+
+    {% block head_extra %}{% endblock head_extra %}
 </head>
 <body class="{% block body_class %}{% endblock body_class %}">
-    <!-- Background blur overlay -->
-    <div id="background-blur" class="background-blur"></div>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    {% block content %}{% endblock content %}
+    <!-- Background blur overlay -->
+    <div id="background-blur" class="background-blur" aria-hidden="true"></div>
+
+    <main id="main-content" role="main">
+        {% block content %}{% endblock content %}
+    </main>
 
     <!-- Scroll to top button -->
-    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top of page" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer-content">
             <p>This work is in the public domain</p>
-            <p class="license">Content available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">Creative Commons</a> license</p>
+            <p class="license">Content available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer license">Creative Commons CC0</a> license</p>
         </div>
     </footer>
 
@@ -79,8 +161,10 @@
                 if (scrollTopBtn) {
                     if (scroll > 400) {
                         scrollTopBtn.classList.add('visible');
+                        scrollTopBtn.setAttribute('aria-hidden', 'false');
                     } else {
                         scrollTopBtn.classList.remove('visible');
+                        scrollTopBtn.setAttribute('aria-hidden', 'true');
                     }
                 }
             }
@@ -91,6 +175,8 @@
             if (scrollTopBtn) {
                 scrollTopBtn.addEventListener('click', function() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                    // Move focus to top of page for accessibility
+                    document.body.focus();
                 });
             }
 
@@ -128,19 +214,12 @@
                     // Update active states
                     tocLinks.forEach(function(link) {
                         link.classList.remove('active');
+                        link.setAttribute('aria-current', 'false');
                     });
 
                     if (activeHeading) {
                         activeHeading.link.classList.add('active');
-
-                        // Also highlight parent if this is a nested item
-                        const parentLi = activeHeading.link.closest('ul')?.closest('li');
-                        if (parentLi) {
-                            const parentLink = parentLi.querySelector(':scope > a');
-                            if (parentLink && parentLink !== activeHeading.link) {
-                                // Don't override if active link is the parent
-                            }
-                        }
+                        activeHeading.link.setAttribute('aria-current', 'true');
                     }
                 }
 
@@ -158,6 +237,9 @@
                             e.preventDefault();
                             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                             history.pushState(null, null, href);
+                            // Set focus to target for accessibility
+                            target.setAttribute('tabindex', '-1');
+                            target.focus();
                         }
                     }
                 });

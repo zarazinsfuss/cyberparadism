@@ -1,26 +1,102 @@
 {% extends "base.html" %}
 
 {% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
+{% block meta_title %}{{ page.title }} | {{ config.title }}{% endblock meta_title %}
 {% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
+{% block keywords %}cyberparadism gallery, visual aesthetic, techno-optimism art, futurism imagery, cyberparadism{% endblock keywords %}
+
+{% block canonical %}{{ page.permalink }}{% endblock canonical %}
+
+{% block og_type %}website{% endblock og_type %}
+{% block og_url %}{{ page.permalink }}{% endblock og_url %}
+{% block og_title %}{{ page.title }} | {{ config.title }}{% endblock og_title %}
+{% block og_description %}{{ page.description | default(value=config.description) }}{% endblock og_description %}
+{% if page.extra.hero_image %}
+{% block og_image %}{{ config.base_url }}/{{ page.extra.hero_image }}{% endblock og_image %}
+{% endif %}
+
+{% block twitter_url %}{{ page.permalink }}{% endblock twitter_url %}
+{% block twitter_title %}{{ page.title }} | {{ config.title }}{% endblock twitter_title %}
+{% block twitter_description %}{{ page.description | default(value=config.description) }}{% endblock twitter_description %}
+{% if page.extra.hero_image %}
+{% block twitter_image %}{{ config.base_url }}/{{ page.extra.hero_image }}{% endblock twitter_image %}
+{% endif %}
+
+{% block page_id %}{{ page.permalink }}#gallery{% endblock page_id %}
+{% block page_url %}{{ page.permalink }}{% endblock page_url %}
+{% block page_name %}{{ page.title }}{% endblock page_name %}
+{% block page_description %}{{ page.description | default(value=config.description) }}{% endblock page_description %}
+
+{% block jsonld_extra %}
+,{
+    "@type": "ImageGallery",
+    "@id": "{{ page.permalink }}#gallery",
+    "name": "{{ page.title }}",
+    "description": "{{ page.description | default(value='') }}",
+    "url": "{{ page.permalink }}",
+    "mainEntityOfPage": {
+        "@id": "{{ page.permalink }}#gallery"
+    },
+    "publisher": {
+        "@id": "{{ config.base_url }}/#organization"
+    },
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/"
+    {% if page.extra.images %},
+    "numberOfItems": {{ page.extra.images | length }},
+    "itemListElement": [
+        {% for image in page.extra.images %}
+        {
+            "@type": "ImageObject",
+            "position": {{ loop.index }},
+            "name": "{{ image.title }}",
+            "description": "{{ image.description | default(value='') }}",
+            "contentUrl": "{{ config.base_url }}/{{ image.src }}",
+            "thumbnailUrl": "{{ config.base_url }}/{{ image.src }}",
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+    {% endif %}
+},
+{
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ config.base_url }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ page.title }}",
+            "item": "{{ page.permalink }}"
+        }
+    ]
+}
+{% endblock jsonld_extra %}
 
 {% block body_class %}gallery{% endblock body_class %}
 
 {% block content %}
-<main class="gallery-main">
+<section class="gallery-main" itemscope itemtype="https://schema.org/ImageGallery">
     {% if page.extra.show_hero | default(value=false) and page.extra.hero_image %}
     <!-- Fixed background image -->
-    <div class="hero-background">
-        <img src="{{ get_url(path=page.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation">
-        <div class="hero-gradient"></div>
-        <div class="hero-gradient-overlay"></div>
+    <div class="hero-background" role="presentation">
+        <img src="{{ get_url(path=page.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation" aria-hidden="true">
+        <div class="hero-gradient" aria-hidden="true"></div>
+        <div class="hero-gradient-overlay" aria-hidden="true"></div>
     </div>
     {% endif %}
 
     <div class="gallery-container">
         <header class="gallery-header">
-            <h1 class="page-title">{{ page.title }}</h1>
+            <h1 class="page-title" itemprop="name">{{ page.title }}</h1>
             {% if page.description %}
-            <p class="gallery-description">{{ page.description }}</p>
+            <p class="gallery-description" itemprop="description">{{ page.description }}</p>
             {% endif %}
         </header>
 
@@ -31,16 +107,17 @@
         {% endif %}
 
         {% if page.extra.images %}
-        <div class="gallery-grid">
+        <div class="gallery-grid" role="list" aria-label="Gallery images">
             {% for image in page.extra.images %}
-            <button class="gallery-item" data-index="{{ loop.index0 }}" aria-label="View {{ image.title }}">
-                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}" loading="lazy">
+            <button class="gallery-item" data-index="{{ loop.index0 }}" aria-label="View full size: {{ image.title }}" role="listitem" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}{% if image.description %} - {{ image.description }}{% endif %}" loading="lazy" itemprop="contentUrl">
                 <div class="gallery-caption">
-                    <h3>{{ image.title }}</h3>
+                    <h3 itemprop="name">{{ image.title }}</h3>
                     {% if image.description %}
-                    <p>{{ image.description }}</p>
+                    <p itemprop="description">{{ image.description }}</p>
                     {% endif %}
                 </div>
+                <meta itemprop="license" content="https://creativecommons.org/publicdomain/zero/1.0/">
             </button>
             {% endfor %}
         </div>
@@ -76,9 +153,8 @@
             </svg>
         </button>
 
-        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
     </div>
-</main>
 
 <script>
 (function() {
@@ -184,4 +260,5 @@
     }, { passive: true });
 })();
 </script>
+</section>
 {% endblock content %}
