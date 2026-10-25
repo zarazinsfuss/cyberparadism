@@ -23,6 +23,8 @@ Cyberparadism is frequently described as *post-cyberpunk* in mood. It keeps the 
 
 **Other names.** The term is sometimes paired with or replaced by **Cyber Paradise**, **Cybergenesis** and **Neogenesis** or **Neogenesism**. Usage varies by community.
 
+**Where it is filed.** The [Personal Aesthetics Wiki](https://personal-aesthetics.fandom.com/wiki/Cyberparadism) entry, the aesthetic's first formal description, files Cyberparadism as a subset of Cyberprep and traces its optimism back to the early twentieth-century avant-garde's break with historical revival styles. The [related chapter](@/field-guide/related.md) takes up both points.
+
 **Aesthetic-first framing.** Cyberparadism is best understood as a *style system*: a cluster of recurring visual motifs, compositional habits and story tropes. When it is extended into real-world inspiration, for architecture, product design or lifestyle moodboards, it remains primarily aesthetic: a set of cues for what the cyberparadise looks and feels like, rather than a blueprint for governance. The [manifesto](@/manifesto.md) says the same in its own words: it is not a political or economic manifesto.
 
 ## Core ethos
@@ -37,6 +39,14 @@ Four commitments run through nearly every work that reads as Cyberparadist:
 A motto commonly quoted in community descriptions compresses all four:
 
 > "Sophistication of technology is the gateway to abundance and prosperity."
+
+## Reading the Laws
+
+The manifesto's eight Laws, Abundance, Equity, Freedom, Harmony, Preservation, Recognition, Responsibility and Simplicity, are declared "not hierarchical in nature, but rather complementary facets of a whole". Read that way they work as mutual constraints rather than a ranked list. Equity, a universal baseline, is paired with Recognition, reward for individual contribution, so that neither cancels the other. Harmony and Preservation carry the signature demand that technology be integrated with the living world rather than imposed on it. Responsibility weighs the cost of great technological power, and Simplicity makes minimalism a design principle rather than a style. This is why Cyberparadism reads as the aesthetic of an integrated way of life rather than a priority-ordered program, and why a scene can wear the look while breaking the Laws; the [distinctions chapter](@/field-guide/distinctions.md#cautionary-cases) collects such cases.
+
+## Etymology
+
+The name joins *cyber-* to *paradise*. The prefix descends from the Greek *kybernētēs*, a steersman, and entered modern vocabulary through Norbert Wiener's *Cybernetics* in 1948. From there it spread: *cyborg* in 1960, *cyberspace* in William Gibson's story "Burning Chrome" in 1982 and his novel *Neuromancer* in 1984, and *cyberpunk* as a label by the middle of that decade. *Paradise* runs the other way in time, from Old Persian *paridaida*, a walled enclosure, through Greek *paradeisos*, the word the Septuagint chose for the garden of Eden at Genesis 2:8. The compound therefore reads as "cybernetic paradise": the oldest word for a walled garden, fitted to the machine age. It suits an aesthetic whose signature composition is a bounded garden inside a larger wilderness; see [enclosure](@/field-guide/visual-language.md#architecture-and-the-enclave).
 
 ## How to read the rest of this guide
 

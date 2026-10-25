@@ -27,6 +27,10 @@ Green imagery alone does not make a work Cyberparadist. The aesthetic is defined
 
 Many works use the paradise surface to complicate it later: the enclave's costs, its exclusions, or a hidden form of control. That narrative move can appear inside otherwise optimistic styling. The aesthetic describes how things look, not whether the society behind them is good. The [manifesto](@/manifesto.md) states an optimistic ethos; a work can share the look and question the ethos.
 
+## Cautionary cases
+
+Because the aesthetic is a surface, it can be worn without its Laws, and several films do exactly that. *Elysium* (2013) builds a luxurious orbital garden for an enclave while the planet below is left in scarcity: a Cyberparadist look laid over a plain violation of the Law of Equity. *Jurassic World* (2015) attaches the clean, integrated-technology surface to a story of breakdown and concealment, and *Oblivion* (2013) does the same in a quieter key, with an elevated habitat above a ruined world. Read from inside the aesthetic these are not counterexamples but warnings: the surface without the Laws produces the dystopia it was meant to answer. They are also a useful test for makers. If a scene's abundance depends on scarcity kept out of frame, it is *Elysium*, however good the domes look.
+
 ## At a glance
 
 | | Cyberparadism | Cyberpunk | Solarpunk |

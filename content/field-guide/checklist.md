@@ -20,7 +20,7 @@ A piece of art is usually read as Cyberparadist when most of these are true:
 5. The mood is **optimistic, serene or sensually pleasurable** rather than gritty or anxious.
 6. The composition implies **enclosure**: a campus, a garden, a habitat, a ring.
 
-Four out of six is a borderline case. Fewer, and the work belongs to a neighbour; see the [distinctions](@/field-guide/distinctions.md).
+Four out of six is a borderline case. Fewer, and the work belongs to a neighbour; see the [distinctions](@/field-guide/distinctions.md). One further test applies when the work tells a story: the abundance is not paid for by scarcity kept out of frame. A paradise for an enclave above a deprived world wears the look and breaks the Laws; the [cautionary cases](@/field-guide/distinctions.md#cautionary-cases) explain why.
 
 ## Composing it
 

@@ -14,8 +14,16 @@ name = "Ambient interface"
 definition = "Information shown in the environment rather than on a device: a label floating beside a plant, a capacity reading above a walkway. The aesthetic's preferred way to show that technology is present."
 
 [[extra.terms]]
+name = "Arcology"
+definition = "Paolo Soleri's term for a dense, self-contained habitat designed as one ecological whole. The ancestor of the aesthetic's coherent enclave."
+
+[[extra.terms]]
 name = "Atoll"
 definition = "A ring-shaped island enclosing a lagoon. Used in the gallery for any ring-shaped enclave at sea."
+
+[[extra.terms]]
+name = "Biomimicry"
+definition = "Design that learns its forms and processes from living systems, after Janine Benyus. Behind the branching, helical and grown-looking structures in the shape vocabulary."
 
 [[extra.terms]]
 name = "Breakaway civilization"
@@ -54,6 +62,10 @@ name = "Folly"
 definition = "The vivid red-pink accent in the palette, used at most once per scene."
 
 [[extra.terms]]
+name = "Geodesic dome"
+definition = "A dome built from a lattice of triangles, popularized by Buckminster Fuller. The most literal ancestor of the aesthetic's domes and shells."
+
+[[extra.terms]]
 name = "Junglecore"
 definition = "An aesthetic of dense, saturated tropical nature. Supplies much of Cyberparadism's environmental staging."
 
@@ -68,6 +80,10 @@ definition = "The principle that mature technology looks simpler, not more compl
 [[extra.terms]]
 name = "Motif"
 definition = "A recurring visual element. In the gallery, pieces are filed by motif (dome, lattice, ring, waterfall) as well as by setting."
+
+[[extra.terms]]
+name = "Post-scarcity"
+definition = "A condition in which automation and energy abundance make material want optional rather than structural. The economic premise the aesthetic depicts without arguing for."
 
 [[extra.terms]]
 name = "Post-cyberpunk"
