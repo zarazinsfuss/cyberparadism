@@ -13,7 +13,7 @@ The site is built with [Zola](https://www.getzola.org/).
 ```
 content/
   _index.md              front page copy and the three doors
-  manifesto.md           founding document (2022), lightly copyedited
+  manifesto.md           founding document (2023), lightly copyedited
   contribute.md          what fits, provenance, license, how to submit
   about.md               colophon, timeline, emblem, build notes
   field-guide/           nine reference chapters, ordered by weight
