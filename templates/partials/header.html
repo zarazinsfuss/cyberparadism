@@ -13,7 +13,7 @@
           {%- if u in current_path -%}{%- set cur = true -%}{%- endif -%}
           {%- if u == "/gallery/" -%}{%- if "/settings/" in current_path or "/motifs/" in current_path -%}{%- set cur = true -%}{%- endif -%}{%- endif -%}
         {%- endif -%}
-        <li><a href="{{ get_url(path=u) }}"{% if cur %} aria-current="page"{% endif %}>{{ item.name }}</a></li>
+        <li><a href="{{ get_url(path=u, trailing_slash=true) }}"{% if cur %} aria-current="page"{% endif %}>{{ item.name }}</a></li>
         {% endfor %}
       </ul>
     </nav>
