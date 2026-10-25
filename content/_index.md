@@ -1,17 +1,31 @@
 +++
-title = "Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future."
-description = "Cyberparadism: A techno-optimist aesthetic guiding us towards a possible future."
-sort_by = "date"
+title = "Cyberparadism"
+description = "Small, advanced human enclaves set inside lush and untamed nature, where mature technology quietly provides abundance. A founding manifesto, a field guide to the visual language, and a growing gallery."
+sort_by = "none"
+
+[extra]
+headline = "A techno-optimist aesthetic in which a small, advanced enclave lives <em>inside</em> wild nature, not instead of it."
+hero_piece = "the-dome-shore"
+
+[[extra.doors]]
+title = "The Manifesto"
+text = "The founding text from 2022: the aesthetic principles, the eight Laws and the Signs of Cyberparadism."
+cta = "Read the manifesto"
+url = "/manifesto/"
+
+[[extra.doors]]
+title = "The Field Guide"
+text = "What the aesthetic is and is not: settings, visual language, shape vocabulary, palette, distinctions and a checklist."
+cta = "Open the field guide"
+url = "/field-guide/"
+
+[[extra.doors]]
+title = "The Gallery"
+text = "Pieces that embody the aesthetic, each with its provenance, setting and motifs, released into the public domain."
+cta = "Browse the gallery"
+url = "/gallery/"
 +++
 
-This is the official web presence of the Cyberparadism aesthetic that formerly originated on the [Aesthetics Wiki](https://aesthetics.fandom.com/wiki/Cyberparadism). Cyberparadism is an aesthetics that typically depicts lush and untamed nature, wherein a small-numbered breakaway civilization uses advanced, but reasonably possible technology for self-preservation up to the point of luxurious comfort that enables them to live in a paradise, hence the name. Common themes are resource-based economy, genetic life engineering, terraformation, exoplanets or similar tropes of space frontier exploration.
+Cyberparadism belongs to no one. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki and in the 2022 manifesto, and everything on this site is released under CC0 so it can be reused, remixed and built upon.
 
-<div class="cta-box">
-  <span class="cta-icon">&#9733;</span>
-  <div class="cta-content">
-    <span>Do you want to submit your <code>article</code> to be published here?</span>
-    <a href="https://github.com/zarazinsfuss/cyberparadism/issues/new?template=article-submission.yml" target="_blank" class="cta-button">Submit</a>
-  </div>
-</div>
-
-It's best if you start by exploring the [Manifesto](@/articles/manifesto.md) first to get a feel for what Cyberparadism actually tries to be. If you like what you see, check out the project on [Github](https://github.com/zarazinsfuss/cyberparadism) and contribute your own ideas to it.
+Artwork and writing that fit the aesthetic are welcome. The [contribute page](@/contribute.md) explains what fits, how provenance is stated, and how to submit.

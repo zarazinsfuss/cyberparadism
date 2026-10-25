@@ -1,59 +1,51 @@
-![cyperparadism_hero.png](https://raw.githubusercontent.com/zarazinsfuss/cyberparadism-manifesto/main/cyberparadism_hero2.png)
+# Cyberparadism · website
 
-# Cyberparadism | Website
+The home of the Cyberparadism aesthetic on the web: the founding manifesto, a field guide to the aesthetic's settings, visual language, shapes and palette, and a gallery of pieces with their provenance.
 
-This is the official [web presence](https://zarazinsfuss.github.io/cyberparadism/) of the Cyberparadism aesthetic that formerly originated on the Aesthetics Wiki. Cyberparadism is an aesthetics that typically depicts lush and untamed nature, wherein a small-numbered breakaway civilization uses advanced, but reasonably possible technology for self-preservation up to the point of luxurious comfort that enables them to live in a paradise, hence the name. Common themes are resource-based economy, genetic life engineering, terraformation, exoplanets or similar tropes of space frontier exploration.
+**Site:** https://zarazinsfuss.github.io/cyberparadism/
 
-**Link to the website:** [CYBERPARADISM: A techno-optimist aesthetic guiding us towards a possible future.](https://zarazinsfuss.github.io/cyberparadism/)
+Cyberparadism is a techno-optimist aesthetic that sets a small, highly advanced human enclave inside lush and untamed nature, where mature technology quietly provides abundance. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki, and was given a manifesto in 2022.
 
-## Project Structure
+## Structure
 
-The site is built using [Zola](https://www.getzola.org/), a fast static site generator written in Rust. The Cyberparadism website is structured as follows:
+The site is built with [Zola](https://www.getzola.org/).
 
-- `content/`: Contains all the markdown files which make up the content of the site.
-- `static/`: Hosts all static content like images and icons.
-- `templates/`: Holds the HTML templates that define the structure of different types of pages.
-- `sass/`: Contains SCSS stylesheets compiled by Zola.
-- `config.toml`: The main configuration file for the Zola site.
-- `mise.toml`: Task runner and tool version management configuration.
+```
+content/
+  _index.md              front page copy and the three doors
+  manifesto.md           founding document (2022), lightly copyedited
+  contribute.md          what fits, provenance, license, how to submit
+  about.md               colophon, timeline, emblem, build notes
+  field-guide/           nine reference chapters, ordered by weight
+  gallery/<slug>/        one folder per piece: index.md + the JPEG master
+  articles/_index.md     redirect kept for old links
+templates/               Tera templates, partials and shortcodes
+sass/style.scss          design tokens, day and night themes, components
+static/                  fonts (self-hosted, OFL), icons, social image
+```
+
+Gallery images are resized at build time from the masters in `content/gallery/`; the derivatives land in `static/processed_images/`, which is ignored by git.
 
 ## Contributing
 
-We welcome all contributions to the Cyberparadism web presence! Whether it's adding content, improving the design, or fixing bugs, your input is valuable.
+Artwork and writing are welcome. The [contribute page](https://zarazinsfuss.github.io/cyberparadism/contribute/) explains what fits, how provenance is stated and the CC0 terms. Use the issue forms for an [artwork](https://github.com/zarazinsfuss/cyberparadism/issues/new?template=artwork-submission.yml) or [article](https://github.com/zarazinsfuss/cyberparadism/issues/new?template=article-submission.yml) submission, or open a pull request.
 
-## Building the Site
+## Building
 
-This project uses [mise](https://mise.jdx.dev/) for tool version management and task running.
-
-### Prerequisites
-
-1. Install mise on your machine (see [mise documentation](https://mise.jdx.dev/getting-started.html))
-2. Clone this repository
-3. Run `mise trust` to trust the configuration
-4. Run `mise install` to install Zola
-
-### Development
+Tool versions and tasks are managed with [mise](https://mise.jdx.dev/).
 
 ```bash
-# Serve the site locally with live reload
-mise run serve
-
-# Build the site for production
-mise run build
-
-# Check for broken links
-mise run check
-
-# Clean the public directory
-mise run clean
+mise trust && mise install   # installs Zola
+mise run serve               # http://127.0.0.1:1111 with live reload
+mise run build               # production build into public/
+mise run check               # build plus link check
+mise run clean               # remove public/ and generated image derivatives
 ```
 
-The development server runs at `http://127.0.0.1:1111` by default.
+Pushes to `main` are deployed to GitHub Pages by the workflow in `.github/workflows/`.
 
-## Reporting Issues
+## License
 
-If you encounter any issues or have suggestions for improvements, please file an issue in this repository's Issue Tracker.
+All text and images are dedicated to the public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). The fonts (Newsreader, Sora) are under the SIL Open Font License.
 
----
-
-_Made with love in Switzerland, using [Zola](https://www.getzola.org/) and [GitHub](https://github.com)._
+Made in Switzerland.

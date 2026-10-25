@@ -2,7 +2,7 @@
 zola = "latest"
 
 [tasks.build]
-description = "Build the Zola site"
+description = "Build the Zola site into public/"
 run = "zola build"
 
 [tasks.serve]
@@ -10,9 +10,9 @@ description = "Serve the site locally with live reload"
 run = "zola serve"
 
 [tasks.check]
-description = "Check for broken links and other issues"
+description = "Build and check internal and external links"
 run = "zola check"
 
 [tasks.clean]
-description = "Clean the public directory"
-run = "rm -rf public"
+description = "Remove build output and generated image derivatives"
+run = "rm -rf public static/processed_images"

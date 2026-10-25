@@ -1,0 +1,114 @@
+{#- Tera 2 components. Usable from Markdown content and from templates. -#}
+
+{% component note() %}
+<div class="note">{{ body | markdown | safe }}</div>
+{% endcomponent note %}
+
+{% component palette() %}
+{%- set swatches = [
+  ["Teal", "#008080", "Primary accent. Deep water, shade under canopy, links and emphasis on light surfaces."],
+  ["Aquamarine", "#7FFFD4", "Shallow lagoon light. Highlights, selections, links on dark surfaces."],
+  ["Jungle Green", "#29AB87", "Canopy and living systems. Secondary accent, active states, markers."],
+  ["Turquoise", "#40E0D0", "Mid-water. Gradients between teal and aquamarine, hover states."],
+  ["Cyan", "#00FFFF", "Pure signal light. Interface glow and holographic cues. Use sparingly."],
+  ["Folly", "#FF004F", "The single vivid accent. Alerts, a lone flower, a warning light. Never more than one per scene."],
+  ["Silver", "#C0C0C0", "Machined metal and hairlines."],
+  ["Platinum", "#E5E4E2", "Ceramic surfaces, pale concrete, the ground of a light interface."],
+  ["Charcoal", "#333333", "Ink, shadow, the ground of a dark interface."],
+  ["White", "#FFFFFF", "Glare, cloud, blank material."]
+] -%}
+<ul class="swatches">
+{%- for s in swatches %}
+  <li class="swatch">
+    <div class="chip-block" style="background: {{ s[1] }}" role="img" aria-label="{{ s[0] }} {{ s[1] }}"></div>
+    <div class="n">{{ s[0] }}</div>
+    <div class="h">{{ s[1] }}</div>
+    <div class="r">{{ s[2] }}</div>
+  </li>
+{%- endfor %}
+</ul>
+{% endcomponent palette %}
+
+{#- Content-time components cannot look other pages up (the library is not loaded yet),
+    so `pieces` and `fig` only emit a placeholder comment. `render_body`, called from
+    page.html at render time, expands the placeholders with live page data. -#}
+{% component pieces(slugs) %}
+<!--embed: pieces {{ slugs | join(sep=",") }} -->
+{% endcomponent pieces %}
+
+{% component fig(piece, caption="") %}
+<!--embed: fig {{ piece }}|{{ caption }} -->
+{% endcomponent fig %}
+
+{% component render_body(html) %}
+{%- set chunks = html | split(pat="<!--embed: ") -%}
+{%- for chunk in chunks -%}
+  {%- if loop.first -%}
+    {{- chunk | safe -}}
+  {%- else -%}
+    {%- set parts = chunk | split(pat=" -->") -%}
+    {%- set spec = parts | first -%}
+    {%- set rest = chunk | trim_start(pat=spec ~ " -->") -%}
+    {%- set words = spec | split(pat=" ") -%}
+    {%- set kind = words | first -%}
+    {%- set arg = spec | trim_start(pat=kind) | trim -%}
+    {%- if kind == "pieces" -%}
+      <ul class="pieces">
+      {%- for raw in arg | split(pat=",") -%}
+        {%- set slug = raw | trim -%}
+        {%- set piece = get_page(path="gallery/" ~ slug ~ "/index.md") -%}
+        {% include "partials/piece-card.html" %}
+      {%- endfor -%}
+      </ul>
+    {%- elif kind == "fig" -%}
+      {%- set fparts = arg | split(pat="|") -%}
+      {%- set fslug = fparts | first | trim -%}
+      {%- set fcaption = "" -%}
+      {%- if fparts | length > 1 -%}{%- set fcaption = fparts | nth(n=1) | trim -%}{%- endif -%}
+      {%- set p = get_page(path="gallery/" ~ fslug ~ "/index.md") -%}
+      {% include "partials/figure.html" %}
+    {%- endif -%}
+    {{- rest | safe -}}
+  {%- endif -%}
+{%- endfor -%}
+{% endcomponent render_body %}
+{% component shapes() %}
+<ul class="shapes">
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="60" cy="48" r="32"/><ellipse cx="60" cy="48" rx="32" ry="11" opacity=".5"/><ellipse cx="60" cy="48" rx="12" ry="32" opacity=".5"/></svg>
+    <div class="n">Sphere</div><div class="d">Habitats, craft, pressure vessels. Closed and complete.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 74h92M20 74a40 40 0 0 1 80 0"/><path d="M60 34v40M37 43v31M83 43v31M24 60h72M30 48h60" opacity=".5"/></svg>
+    <div class="n">Dome</div><div class="d">The enclave's signature. Shelter that admits the sky.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 12 94 74H26z"/><ellipse cx="60" cy="74" rx="34" ry="7"/></svg>
+    <div class="n">Cone</div><div class="d">Spires, towers and antennae reaching out of the canopy.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 14 22 64l38 18 38-18z"/><path d="M60 14v68" opacity=".5"/></svg>
+    <div class="n">Pyramid</div><div class="d">Monumental calm. Stable mass against wild terrain.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 12 94 31.5v39L60 90 26 70.5v-39z"/><path d="M60 30 77 39.75v19.5L60 69 43 59.25v-19.5z" opacity=".5"/></svg>
+    <div class="n">Hexagon</div><div class="d">Enclosure and efficiency. The emblem's frame.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 8Q60 22 80 36T40 64 80 92M80 8Q60 22 40 36T80 64 40 92"/><path d="M50 22h20M50 50h20M50 78h20" opacity=".5"/></svg>
+    <div class="n">Helix</div><div class="d">Life engineering made visible. Ramps, towers, growth.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M40 14l10 6v12l-10 6-10-6V20zM60 14l10 6v12l-10 6-10-6V20zM80 14l10 6v12l-10 6-10-6V20zM50 32l10 6v12l-10 6-10-6V38zM70 32l10 6v12l-10 6-10-6V38zM40 50l10 6v12l-10 6-10-6V56zM60 50l10 6v12l-10 6-10-6V56zM80 50l10 6v12l-10 6-10-6V56z"/></svg>
+    <div class="n">Lattice</div><div class="d">Glazing, shells and structure. Repetition without clutter.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="60" cy="50" rx="44" ry="17"/><ellipse cx="60" cy="50" rx="18" ry="6.5"/><path d="M16 50v8a44 17 0 0 0 88 0v-8" opacity=".5"/></svg>
+    <div class="n">Ring</div><div class="d">Atolls, stations, orbital terraces. A centre held open.</div>
+  </li>
+  <li>
+    <svg viewBox="0 0 120 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M60 90V54M60 54 40 32M60 54l20-22M40 32 30 18M40 32l10-16M80 32 70 16M80 32l10-14M30 18l-5-8M30 18l6-9M90 18l5-8M90 18l-6-9"/></svg>
+    <div class="n">Branching</div><div class="d">Fractal columns and canopies. Structure that grew.</div>
+  </li>
+</ul>
+{% endcomponent shapes %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Not found · {{ config.title }}{% endblock title %}
+{% block body_class %}error{% endblock body_class %}
+{% block body %}
+<section class="not-found wrap">
+  {% include "partials/emblem.html" %}
+  <h1>Nothing grows here yet.</h1>
+  <p>The page you asked for does not exist. Try the <a href="{{ get_url(path="/") }}">front page</a>, the <a href="{{ get_url(path="/field-guide/") }}">field guide</a> or the <a href="{{ get_url(path="/gallery/") }}">gallery</a>.</p>
+</section>
+{% endblock body %}

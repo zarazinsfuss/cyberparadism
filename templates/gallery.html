@@ -1,271 +1,33 @@
 {% extends "base.html" %}
-
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
-{% block meta_title %}{{ page.title }} | {{ config.title }}{% endblock meta_title %}
-{% block description %}{{ page.description | default(value=config.description) }}{% endblock description %}
-{% block keywords %}cyberparadism gallery, visual aesthetic, techno-optimism art, futurism imagery, cyberparadism{% endblock keywords %}
-
-{% block canonical %}{{ page.permalink }}{% endblock canonical %}
-
-{% block og_type %}website{% endblock og_type %}
-{% block og_url %}{{ page.permalink }}{% endblock og_url %}
-{% block og_title %}{{ page.title }} | {{ config.title }}{% endblock og_title %}
-{% block og_description %}{{ page.description | default(value=config.description) }}{% endblock og_description %}
-{% if page.extra.hero_image %}
-{% block og_image %}{{ config.base_url }}/{{ page.extra.hero_image }}{% endblock og_image %}
-{% endif %}
-
-{% block twitter_url %}{{ page.permalink }}{% endblock twitter_url %}
-{% block twitter_title %}{{ page.title }} | {{ config.title }}{% endblock twitter_title %}
-{% block twitter_description %}{{ page.description | default(value=config.description) }}{% endblock twitter_description %}
-{% if page.extra.hero_image %}
-{% block twitter_image %}{{ config.base_url }}/{{ page.extra.hero_image }}{% endblock twitter_image %}
-{% endif %}
-
-{% block page_id %}{{ page.permalink }}#gallery{% endblock page_id %}
-{% block page_url %}{{ page.permalink }}{% endblock page_url %}
-{% block page_name %}{{ page.title }}{% endblock page_name %}
-{% block page_description %}{{ page.description | default(value=config.description) }}{% endblock page_description %}
-
-{% block jsonld_extra %}
-,{
-    "@type": "ImageGallery",
-    "@id": "{{ page.permalink }}#gallery",
-    "name": "{{ page.title }}",
-    "description": "{{ page.description | default(value='') }}",
-    "url": "{{ page.permalink }}",
-    "mainEntityOfPage": {
-        "@id": "{{ page.permalink }}#gallery"
-    },
-    "publisher": {
-        "@id": "{{ config.base_url }}/#organization"
-    },
-    "inLanguage": "en-US",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/publicdomain/zero/1.0/"
-    {% if page.extra.images %},
-    "numberOfItems": {{ page.extra.images | length }},
-    "itemListElement": [
-        {% for image in page.extra.images %}
-        {
-            "@type": "ImageObject",
-            "position": {{ loop.index }},
-            "name": "{{ image.title }}",
-            "description": "{{ image.description | default(value='') }}",
-            "contentUrl": "{{ config.base_url }}/{{ image.src }}",
-            "thumbnailUrl": "{{ config.base_url }}/{{ image.src }}",
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/"
-        }{% if not loop.last %},{% endif %}
-        {% endfor %}
-    ]
-    {% endif %}
-},
-{
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ config.base_url }}"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "{{ page.title }}",
-            "item": "{{ page.permalink }}"
-        }
-    ]
-}
-{% endblock jsonld_extra %}
-
 {% block body_class %}gallery{% endblock body_class %}
-
-{% block content %}
-<section class="gallery-main" itemscope itemtype="https://schema.org/ImageGallery">
-    {% if page.extra.show_hero | default(value=false) and page.extra.hero_image %}
-    <!-- Fixed background image -->
-    <div class="hero-background" role="presentation">
-        <img src="{{ get_url(path=page.extra.hero_image, trailing_slash=false) }}" alt="" class="hero-image" role="presentation" aria-hidden="true">
-        <div class="hero-gradient" aria-hidden="true"></div>
-        <div class="hero-gradient-overlay" aria-hidden="true"></div>
-    </div>
-    {% endif %}
-
-    <div class="gallery-container">
-        <header class="gallery-header">
-            <h1 class="page-title" itemprop="name">{{ page.title }}</h1>
-            {% if page.description %}
-            <p class="gallery-description" itemprop="description">{{ page.description }}</p>
-            {% endif %}
-        </header>
-
-        {% if page.content %}
-        <div class="gallery-intro prose">
-            {{ page.content | safe }}
-        </div>
-        {% endif %}
-
-        {% if page.extra.images %}
-        <div class="gallery-grid" role="list" aria-label="Gallery images">
-            {% for image in page.extra.images %}
-            <button class="gallery-item" data-index="{{ loop.index0 }}" aria-label="View full size: {{ image.title }}" role="listitem" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                <img src="{{ get_url(path=image.src, trailing_slash=false) }}" alt="{{ image.title }}{% if image.description %} - {{ image.description }}{% endif %}" loading="lazy" itemprop="contentUrl">
-                <div class="gallery-caption">
-                    <h3 itemprop="name">{{ image.title }}</h3>
-                    {% if image.description %}
-                    <p itemprop="description">{{ image.description }}</p>
-                    {% endif %}
-                </div>
-                <meta itemprop="license" content="https://creativecommons.org/publicdomain/zero/1.0/">
-            </button>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        <!-- Home navigation -->
-        <nav class="gallery-nav" aria-label="Gallery navigation">
-            <a href="{{ config.base_url }}" class="page-nav-home" aria-label="Return to homepage">
-                <img src="{{ get_url(path='img/cyberparadism-icon.avif', trailing_slash=false) }}" alt="Cyberparadism" class="nav-home-icon" aria-hidden="true">
-            </a>
-        </nav>
-    </div>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
-        <button class="lightbox-close" aria-label="Close lightbox">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-
-        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-
-        <div class="lightbox-content">
-            <img class="lightbox-image" src="" alt="" id="lightbox-image">
-            <div class="lightbox-info" id="lightbox-info">
-                <h3 id="lightbox-title"></h3>
-                <p id="lightbox-description"></p>
-            </div>
-        </div>
-
-        <button class="lightbox-nav lightbox-next" aria-label="Next image">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
-
-        <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
-    </div>
-
-<script>
-(function() {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxTitle = document.getElementById('lightbox-title');
-    const lightboxDescription = document.getElementById('lightbox-description');
-    const lightboxCounter = document.getElementById('lightbox-counter');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    // Image data from template
-    const images = [
-        {% for image in page.extra.images %}
-        {
-            src: "{{ get_url(path=image.src, trailing_slash=false) }}",
-            title: "{{ image.title }}",
-            description: "{{ image.description | default(value='') }}"
-        }{% if not loop.last %},{% endif %}
-        {% endfor %}
-    ];
-
-    let currentIndex = 0;
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    function openLightbox(index) {
-        currentIndex = index;
-        updateLightbox();
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-    }
-
-    function updateLightbox() {
-        const image = images[currentIndex];
-        lightboxImage.src = image.src;
-        lightboxImage.alt = image.title;
-        lightboxTitle.textContent = image.title;
-        lightboxDescription.textContent = image.description;
-        lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
-    }
-
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateLightbox();
-    }
-
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateLightbox();
-    }
-
-    // Gallery item clicks
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const index = parseInt(item.dataset.index);
-            openLightbox(index);
-        });
-    });
-
-    // Close button
-    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-
-    // Navigation buttons
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', prevImage);
-    lightbox.querySelector('.lightbox-next').addEventListener('click', nextImage);
-
-    // Click outside to close
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
-            closeLightbox();
-        }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') prevImage();
-    });
-
-    // Touch swipe support
-    lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) nextImage();
-            else prevImage();
-        }
-    }, { passive: true });
-})();
-</script>
+{% block jsonld_extra %},
+    {
+      "@type": "ImageGallery",
+      "@id": "{{ section.permalink }}#gallery",
+      "name": "{{ section.title }}",
+      "description": "{{ section.description }}",
+      "url": "{{ section.permalink }}",
+      "numberOfItems": {{ section.pages | length }},
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }{% endblock jsonld_extra %}
+{% block body %}
+{%- set settings = get_taxonomy(kind="settings") -%}
+<section class="article wrap" style="padding-bottom: 4rem">
+  <header class="article-head">
+    {% if section.extra.eyebrow %}<p class="eyebrow">{{ section.extra.eyebrow }}</p>{% endif %}
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}<p class="lede">{{ section.description }}</p>{% endif %}
+  </header>
+  <div class="prose" style="margin: 1.5rem 0 2.5rem">{{ section.content | safe }}</div>
+  <div class="filter-row" role="navigation" aria-label="Browse by setting">
+    <span class="label">Setting</span>
+    <a class="chip" href="{{ section.permalink }}" aria-current="page">All</a>
+    {% for term in settings.items %}<a class="chip" href="{{ term.permalink }}">{{ term.name }} <span class="count">{{ term.pages | length }}</span></a>{% endfor %}
+  </div>
+  <ul class="pieces">
+    {% for piece in section.pages %}
+      {% include "partials/piece-card.html" %}
+    {% endfor %}
+  </ul>
 </section>
-{% endblock content %}
+{% endblock body %}

@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div class="about">
+        {% include "partials/emblem.html" %}
+        <p>{{ config.description }}</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          {% for item in config.extra.nav %}
+          <li><a href="{{ get_url(path=item.url) }}">{{ item.name }}</a></li>
+          {% endfor %}
+          <li><a href="{{ get_url(path="/about/") }}">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Elsewhere</h2>
+        <ul>
+          {% for s in config.extra.social %}
+          <li><a href="{{ s.url }}" rel="noopener">{{ s.name }}</a></li>
+          {% endfor %}
+          <li><a href="{{ get_url(path="rss.xml", trailing_slash=false) }}">RSS feed</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      <p>Text and images on this site are dedicated to the public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a>.</p>
+      <p>Made in Switzerland. <a href="{{ config.extra.repo_url }}" rel="noopener">Source on GitHub</a>.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,12 @@
+{#- expects `piece` (a gallery page) -#}
+{%- set img = resize_image(path=piece.colocated_path ~ piece.extra.image, width=480, op="fit_width", format="webp", quality=80) -%}
+{%- set img2 = resize_image(path=piece.colocated_path ~ piece.extra.image, width=800, op="fit_width", format="webp", quality=80) -%}
+<li class="piece-card">
+  <a href="{{ piece.permalink }}">
+    <img src="{{ img.url }}" srcset="{{ img.url }} 480w, {{ img2.url }} 800w" sizes="(max-width: 720px) 100vw, (max-width: 1200px) 50vw, 400px" width="{{ img.width }}" height="{{ img.height }}" alt="{{ piece.title }}: {{ piece.description }}" loading="lazy" decoding="async">
+    <div class="cap">
+      <span class="t">{{ piece.title }}</span>
+      {% if piece.taxonomies.settings %}<span class="m">{{ piece.taxonomies.settings | join(sep=" · ") }}</span>{% endif %}
+    </div>
+  </a>
+</li>

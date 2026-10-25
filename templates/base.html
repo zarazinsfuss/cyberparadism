@@ -1,250 +1,128 @@
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary Meta Tags -->
-    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-    <meta name="title" content="{% block meta_title %}{{ config.title }}{% endblock meta_title %}">
-    <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
-    <meta name="keywords" content="{% block keywords %}cyberparadism, techno-optimism, futurism, aesthetic, solarpunk, post-cyberpunk, technology, nature, harmony, abundance{% endblock keywords %}">
-    <meta name="author" content="{{ config.extra.author }}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{% block canonical %}{{ config.base_url }}{% endblock canonical %}">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
-    <meta property="og:url" content="{% block og_url %}{{ config.base_url }}{% endblock og_url %}">
-    <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
-    <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
-    <meta property="og:image" content="{% block og_image %}{{ config.base_url }}/img/cyberparadism_hero_2.avif{% endblock og_image %}">
-    <meta property="og:site_name" content="{{ config.title }}">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="{% block twitter_url %}{{ config.base_url }}{% endblock twitter_url %}">
-    <meta name="twitter:title" content="{% block twitter_title %}{{ config.title }}{% endblock twitter_title %}">
-    <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock twitter_description %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ config.base_url }}/img/cyberparadism_hero_2.avif{% endblock twitter_image %}">
-
-    <!-- Feeds -->
-    {% if config.generate_feeds %}
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed for {{ config.title }}" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
-    {% endif %}
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) }}">
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ get_url(path="favicon.ico", trailing_slash=false) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path="img/favicon-32.png", trailing_slash=false) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path="img/favicon-16.png", trailing_slash=false) }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path="img/apple-touch-icon.png", trailing_slash=false) }}">
-    <link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
-    <meta name="theme-color" content="#06b6d4">
-
-    <!-- JSON-LD Structured Data for AI/LLM and Search Engines -->
-    <script type="application/ld+json">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if page is defined -%}
+  {%- set m_title = page.title -%}
+  {%- set m_desc = page.description | default(value=config.description) -%}
+  {%- set m_url = page.permalink -%}
+{%- elif term is defined -%}
+  {%- set tname = term.name | title -%}
+  {%- set xname = taxonomy.name | title -%}
+  {%- set m_title = xname ~ ": " ~ tname -%}
+  {%- set m_desc = "Gallery pieces filed under the " ~ taxonomy.name ~ " " ~ term.name ~ "." -%}
+  {%- set m_url = term.permalink -%}
+{%- elif taxonomy is defined -%}
+  {%- set m_title = taxonomy.name | title -%}
+  {%- set m_desc = "All " ~ taxonomy.name ~ " used to file pieces in the Cyberparadism gallery." -%}
+  {%- set m_url = get_url(path=taxonomy.slug ~ "/") -%}
+{%- elif section is defined -%}
+  {%- set m_title = section.title -%}
+  {%- set m_desc = section.description | default(value=config.description) -%}
+  {%- set m_url = section.permalink -%}
+{%- else -%}
+  {%- set m_title = config.title -%}
+  {%- set m_desc = config.description -%}
+  {%- set m_url = config.base_url ~ "/" -%}
+{%- endif -%}
+{%- set is_home = false -%}
+{%- if section is defined and section.path == "/" -%}{%- set is_home = true -%}{%- endif -%}
+{%- set og = config.base_url ~ "/" ~ config.extra.og_image -%}
+{%- if page is defined -%}
+  {%- if page.extra.image -%}
+    {%- set og_r = resize_image(path=page.colocated_path ~ page.extra.image, width=1200, height=630, op="fill", format="jpg", quality=82) -%}
+    {%- set og = og_r.url -%}
+  {%- elif page.extra.cover_piece -%}
+    {%- set cp = get_page(path="gallery/" ~ page.extra.cover_piece ~ "/index.md") -%}
+    {%- set og_r = resize_image(path=cp.colocated_path ~ cp.extra.image, width=1200, height=630, op="fill", format="jpg", quality=82) -%}
+    {%- set og = og_r.url -%}
+  {%- endif -%}
+{%- endif -%}
+<title>{% block title %}{% if is_home %}{{ config.title }}: {{ config.extra.tagline }}{% else %}{{ m_title }} · {{ config.title }}{% endif %}{% endblock title %}</title>
+<meta name="description" content="{{ m_desc }}">
+<meta name="author" content="{{ config.author }}">
+<link rel="canonical" href="{{ m_url }}">
+<meta property="og:site_name" content="{{ config.title }}">
+<meta property="og:type" content="{% block og_type %}website{% endblock og_type %}">
+<meta property="og:url" content="{{ m_url }}">
+<meta property="og:title" content="{% if is_home %}{{ config.title }}: {{ config.extra.tagline }}{% else %}{{ m_title }}{% endif %}">
+<meta property="og:description" content="{{ m_desc }}">
+<meta property="og:image" content="{{ og }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% if is_home %}{{ config.title }}{% else %}{{ m_title }}{% endif %}">
+<meta name="twitter:description" content="{{ m_desc }}">
+<meta name="twitter:image" content="{{ og }}">
+{% block head_extra %}{% endblock head_extra %}
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3F2F0">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161A19">
+<link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+<link rel="icon" href="{{ get_url(path="favicon.svg", trailing_slash=false) }}" type="image/svg+xml">
+<link rel="icon" href="{{ get_url(path="favicon.ico", trailing_slash=false) }}" sizes="32x32">
+<link rel="apple-touch-icon" href="{{ get_url(path="img/apple-touch-icon.png", trailing_slash=false) }}">
+<link rel="manifest" href="{{ get_url(path="site.webmanifest", trailing_slash=false) }}">
+<link rel="preload" href="{{ get_url(path="fonts/sora-latin.woff2", trailing_slash=false) }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ get_url(path="fonts/newsreader-latin.woff2", trailing_slash=false) }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ get_url(path="style.css", trailing_slash=false) | safe }}">
+<script>(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}})();</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "WebSite",
-                "@id": "{{ config.base_url }}/#website",
-                "url": "{{ config.base_url }}",
-                "name": "{{ config.title }}",
-                "description": "{{ config.description }}",
-                "inLanguage": "en-US",
-                "publisher": {
-                    "@id": "{{ config.base_url }}/#organization"
-                }
-            },
-            {
-                "@type": "Organization",
-                "@id": "{{ config.base_url }}/#organization",
-                "name": "{{ config.extra.author }}",
-                "url": "{{ config.base_url }}",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "{{ config.base_url }}/img/icon-512.png",
-                    "width": 512,
-                    "height": 512
-                },
-                "description": "{{ config.extra.author_headline }}",
-                "sameAs": [
-                    "https://github.com/zarazinsfuss/cyberparadism",
-                    "https://www.tumblr.com/tagged/Cyberparadism",
-                    "https://www.tiktok.com/tag/cyberparadism",
-                    "https://personal-aesthetics.fandom.com/wiki/Cyberparadism"
-                ]
-            },
-            {
-                "@type": "WebPage",
-                "@id": "{% block page_id %}{{ config.base_url }}/#webpage{% endblock page_id %}",
-                "url": "{% block page_url %}{{ config.base_url }}{% endblock page_url %}",
-                "name": "{% block page_name %}{{ config.title }}{% endblock page_name %}",
-                "description": "{% block page_description %}{{ config.description }}{% endblock page_description %}",
-                "isPartOf": {
-                    "@id": "{{ config.base_url }}/#website"
-                },
-                "inLanguage": "en-US"
-            }
-            {% block jsonld_extra %}{% endblock jsonld_extra %}
-        ]
-    }
-    </script>
-
-    {% block head_extra %}{% endblock head_extra %}
+      "@type": "WebSite",
+      "@id": "{{ config.base_url }}/#website",
+      "url": "{{ config.base_url }}/",
+      "name": "{{ config.title }}",
+      "description": "{{ config.description }}",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "{{ config.base_url }}/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ config.base_url }}/#organization",
+      "name": "{{ config.title }}",
+      "url": "{{ config.base_url }}/",
+      "logo": { "@type": "ImageObject", "url": "{{ config.base_url }}/img/icon-512.png", "width": 512, "height": 512 },
+      "sameAs": [{% for s in config.extra.social %}"{{ s.url }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ m_url }}#webpage",
+      "url": "{{ m_url }}",
+      "name": "{{ m_title }}",
+      "description": "{{ m_desc }}",
+      "isPartOf": { "@id": "{{ config.base_url }}/#website" },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": "{{ og }}" },
+      "inLanguage": "en-US",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }{% block jsonld_extra %}{% endblock jsonld_extra %}
+  ]
+}
+</script>
 </head>
 <body class="{% block body_class %}{% endblock body_class %}">
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Background blur overlay -->
-    <div id="background-blur" class="background-blur" aria-hidden="true"></div>
-
-    <main id="main-content" role="main">
-        {% block content %}{% endblock content %}
-    </main>
-
-    <!-- Scroll to top button -->
-    <button id="scroll-top" class="scroll-top" aria-label="Scroll to top of page" title="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-    </button>
-
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer-content">
-            <p>This work is in the public domain</p>
-            <p class="license">Content available under a <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer license">Creative Commons CC0</a> license</p>
-        </div>
-    </footer>
-
-    <script>
-        (function() {
-            // Background blur on scroll
-            const backgroundBlur = document.getElementById('background-blur');
-            const scrollTopBtn = document.getElementById('scroll-top');
-
-            // Throttle function for performance
-            function throttle(func, limit) {
-                let inThrottle;
-                return function() {
-                    const args = arguments;
-                    const context = this;
-                    if (!inThrottle) {
-                        func.apply(context, args);
-                        inThrottle = true;
-                        setTimeout(() => inThrottle = false, limit);
-                    }
-                }
-            }
-
-            // Scroll effects
-            function handleScroll() {
-                const scroll = window.pageYOffset || document.documentElement.scrollTop || 0;
-
-                // Background blur
-                if (backgroundBlur) {
-                    backgroundBlur.style.opacity = Math.min(scroll / 300, 1);
-                }
-
-                // Scroll to top button visibility
-                if (scrollTopBtn) {
-                    if (scroll > 400) {
-                        scrollTopBtn.classList.add('visible');
-                        scrollTopBtn.setAttribute('aria-hidden', 'false');
-                    } else {
-                        scrollTopBtn.classList.remove('visible');
-                        scrollTopBtn.setAttribute('aria-hidden', 'true');
-                    }
-                }
-            }
-
-            window.addEventListener('scroll', throttle(handleScroll, 16));
-
-            // Scroll to top functionality
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    // Move focus to top of page for accessibility
-                    document.body.focus();
-                });
-            }
-
-            // TOC Active Section Tracking
-            const tocLinks = document.querySelectorAll('.toc-list a');
-            const headings = [];
-
-            if (tocLinks.length > 0) {
-                // Collect all headings that have corresponding TOC links
-                tocLinks.forEach(function(link) {
-                    const href = link.getAttribute('href');
-                    if (href) {
-                        const id = href.split('#')[1];
-                        if (id) {
-                            const heading = document.getElementById(id);
-                            if (heading) {
-                                headings.push({ id: id, element: heading, link: link });
-                            }
-                        }
-                    }
-                });
-
-                function updateActiveLink() {
-                    const scrollPos = window.scrollY + 120; // Offset for better UX
-                    let activeHeading = null;
-
-                    // Find the current heading
-                    for (let i = headings.length - 1; i >= 0; i--) {
-                        if (headings[i].element.offsetTop <= scrollPos) {
-                            activeHeading = headings[i];
-                            break;
-                        }
-                    }
-
-                    // Update active states
-                    tocLinks.forEach(function(link) {
-                        link.classList.remove('active');
-                        link.setAttribute('aria-current', 'false');
-                    });
-
-                    if (activeHeading) {
-                        activeHeading.link.classList.add('active');
-                        activeHeading.link.setAttribute('aria-current', 'true');
-                    }
-                }
-
-                window.addEventListener('scroll', throttle(updateActiveLink, 50));
-                updateActiveLink(); // Initial call
-            }
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href && href.length > 1) {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            e.preventDefault();
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            history.pushState(null, null, href);
-                            // Set focus to target for accessibility
-                            target.setAttribute('tabindex', '-1');
-                            target.focus();
-                        }
-                    }
-                });
-            });
-        })();
-    </script>
+<a class="skip-link" href="#main">Skip to content</a>
+{% include "partials/header.html" %}
+<main id="main">
+{% block body %}{% endblock body %}
+</main>
+{% include "partials/footer.html" %}
+<script>
+(function(){
+  var b=document.getElementById("theme-toggle");if(!b)return;
+  b.addEventListener("click",function(){
+    var h=document.documentElement,cur=h.getAttribute("data-theme");
+    if(!cur){cur=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+    var next=cur==="dark"?"light":"dark";
+    h.setAttribute("data-theme",next);
+    try{localStorage.setItem("theme",next)}catch(e){}
+  });
+})();
+</script>
+{% block scripts %}{% endblock scripts %}
 </body>
 </html>

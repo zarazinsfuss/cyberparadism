@@ -1,0 +1,7 @@
+{#- expects `p` (a gallery page) and `fcaption` -#}
+{%- set im = resize_image(path=p.colocated_path ~ p.extra.image, width=1200, op="fit_width", format="webp", quality=80) -%}
+{%- set im_s = resize_image(path=p.colocated_path ~ p.extra.image, width=800, op="fit_width", format="webp", quality=80) -%}
+<figure>
+  <a href="{{ p.permalink }}"><img src="{{ im.url }}" srcset="{{ im_s.url }} 800w, {{ im.url }} 1200w" sizes="(max-width: 720px) 100vw, 66ch" width="{{ im.width }}" height="{{ im.height }}" alt="{{ p.title }}: {{ p.description }}" loading="lazy" decoding="async"></a>
+  <figcaption>{% if fcaption %}{{ fcaption }} {% endif %}<a href="{{ p.permalink }}">{{ p.title }}</a>, {{ p.extra.method | lower }}.</figcaption>
+</figure>

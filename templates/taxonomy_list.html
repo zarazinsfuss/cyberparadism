@@ -1,22 +1,15 @@
 {% extends "base.html" %}
-
-{% block title %}{{ taxonomy.name | title }} | {{ config.title }}{% endblock title %}
-
-{% block body_class %}taxonomy-list{% endblock body_class %}
-
-{% block content %}
-<main class="section-main">
-    <header class="section-header">
-        <h1 class="section-title">{{ taxonomy.name | title }}</h1>
-    </header>
-
-    <div class="tags-list">
-        {% for term in terms %}
-        <a href="{{ term.permalink }}" class="tag-item">
-            <span class="tag-name">{{ term.name }}</span>
-            <span class="tag-count">({{ term.pages | length }})</span>
-        </a>
-        {% endfor %}
-    </div>
-</main>
-{% endblock content %}
+{% block body_class %}taxonomy{% endblock body_class %}
+{% block body %}
+{%- set single = taxonomy.name | replace(from="settings", to="setting") | replace(from="motifs", to="motif") -%}
+<section class="article wrap" style="padding-bottom: 4rem">
+  <header class="article-head">
+    <p class="eyebrow">Gallery index</p>
+    <h1>{{ taxonomy.name | title }}</h1>
+    <p class="lede">Every {{ single }} used to file pieces in the gallery.</p>
+  </header>
+  <ul class="terms-list">
+    {% for term in terms %}<li><a class="chip" href="{{ term.permalink }}">{{ term.name }}<span class="count">{{ term.pages | length }}</span></a></li>{% endfor %}
+  </ul>
+</section>
+{% endblock body %}

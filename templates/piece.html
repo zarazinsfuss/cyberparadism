@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block og_type %}article{% endblock og_type %}
+{% block body_class %}piece{% endblock body_class %}
+{% block jsonld_extra %},
+    {
+      "@type": "VisualArtwork",
+      "@id": "{{ page.permalink }}#artwork",
+      "name": "{{ page.title }}",
+      "description": "{{ page.description | default(value="") }}",
+      "url": "{{ page.permalink }}",
+      "image": "{{ get_url(path=page.colocated_path ~ page.extra.image) }}",
+      "artform": "Digital image",
+      "artMedium": "{{ page.extra.method }}",
+      "creator": { "@type": "Person", "name": "{{ page.extra.creator }}" },
+      "dateCreated": "{{ page.date | date(format="%Y-%m-%d") }}",
+      "keywords": "{{ page.taxonomies.settings | join(sep=", ") }}, {{ page.taxonomies.motifs | join(sep=", ") }}",
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "mainEntityOfPage": { "@id": "{{ page.permalink }}#webpage" }
+    }{% endblock jsonld_extra %}
+{% block body %}
+{%- set src = page.colocated_path ~ page.extra.image -%}
+{%- set meta = get_image_metadata(path=src) -%}
+{%- set big = resize_image(path=src, width=1600, op="fit_width", format="webp", quality=80) -%}
+{%- set mid = resize_image(path=src, width=1200, op="fit_width", format="webp", quality=80) -%}
+{%- set small = resize_image(path=src, width=800, op="fit_width", format="webp", quality=80) -%}
+{%- set original = get_url(path=src) -%}
+<article class="wrap">
+  <div class="piece-view">
+    <figure>
+      <img class="piece-img" id="piece-img" src="{{ mid.url }}" srcset="{{ small.url }} 800w, {{ mid.url }} 1200w, {{ big.url }} 1600w" sizes="(max-width: 76rem) 100vw, 76rem" width="{{ mid.width }}" height="{{ mid.height }}" alt="{{ page.title }}: {{ page.description }}" fetchpriority="high" decoding="async" data-full="{{ original }}">
+    </figure>
+  </div>
+  <div class="piece-body">
+    <div class="piece-text">
+      <p class="eyebrow">Gallery · {{ page.extra.added }}</p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+      <div class="prose">{{ page.content | safe }}</div>
+    </div>
+    <aside class="provenance" aria-label="Provenance">
+      <dl>
+        <dt>Creator</dt><dd>{{ page.extra.creator }}</dd>
+        <dt>Method</dt><dd>{{ page.extra.method }}</dd>
+        {% if page.extra.tool %}<dt>Tool</dt><dd>{{ page.extra.tool }}</dd>{% endif %}
+        <dt>Added</dt><dd><time datetime="{{ page.date | date(format="%Y-%m-%d") }}">{{ page.extra.added }}</time></dd>
+        <dt>Original</dt><dd>{{ meta.width }} × {{ meta.height }} px · <a href="{{ original }}" download>Download JPEG</a></dd>
+        {% if page.taxonomies.settings %}<dt>Setting</dt><dd class="chips">{% for t in page.taxonomies.settings %}<a class="chip" href="{{ get_taxonomy_url(kind="settings", term=t) }}">{{ t }}</a>{% endfor %}</dd>{% endif %}
+        {% if page.taxonomies.motifs %}<dt>Motifs</dt><dd class="chips">{% for t in page.taxonomies.motifs %}<a class="chip" href="{{ get_taxonomy_url(kind="motifs", term=t) }}">{{ t }}</a>{% endfor %}</dd>{% endif %}
+        <dt>License</dt><dd><a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license noopener">CC0 1.0</a>, public domain</dd>
+      </dl>
+    </aside>
+  </div>
+  <nav class="pager" aria-label="Neighbouring pieces">
+    {% if page.higher %}<a class="prev" href="{{ page.higher.permalink }}"><span class="l">Newer</span><span class="t">{{ page.higher.title }}</span></a>{% endif %}
+    {% if page.lower %}<a class="next" href="{{ page.lower.permalink }}"><span class="l">Older</span><span class="t">{{ page.lower.title }}</span></a>{% endif %}
+  </nav>
+</article>
+<dialog class="zoom" id="zoom" aria-label="{{ page.title }}, full size">
+  <button type="button" id="zoom-close" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <img id="zoom-img" src="" alt="{{ page.title }}: {{ page.description }}">
+</dialog>
+{% endblock body %}
+{% block scripts %}
+<script>
+(function(){
+  var img=document.getElementById("piece-img"),d=document.getElementById("zoom"),z=document.getElementById("zoom-img"),c=document.getElementById("zoom-close");
+  if(!img||!d||!d.showModal)return;
+  function open(){z.src="{{ big.url }}";d.showModal()}
+  function close(){d.close();z.src=""}
+  img.addEventListener("click",open);
+  img.setAttribute("tabindex","0");img.setAttribute("role","button");img.setAttribute("aria-label","Open full size");
+  img.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
+  z.addEventListener("click",close);c.addEventListener("click",close);
+  d.addEventListener("click",function(e){if(e.target===d)close()});
+})();
+</script>
+{% endblock scripts %}

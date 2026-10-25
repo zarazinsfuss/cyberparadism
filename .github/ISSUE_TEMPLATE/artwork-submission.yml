@@ -1,0 +1,99 @@
+name: Artwork submission
+description: Submit a piece for the Cyberparadism gallery
+title: "[Artwork] "
+labels: ["artwork", "contribution"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to the gallery. Please read the [contribute page](https://zarazinsfuss.github.io/cyberparadism/contribute/) first: it explains what fits, how provenance is stated, and the CC0 license.
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: "e.g. Lagoon Enclave"
+    validations:
+      required: true
+
+  - type: input
+    id: description
+    attributes:
+      label: One-sentence description
+      description: Appears under the title and in previews.
+      placeholder: "A serene settlement nestled within tropical waters."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reading
+    attributes:
+      label: Reading (optional)
+      description: Two or three sentences about the setting, how the enclave sits in it, and which motifs carry the aesthetic.
+
+  - type: input
+    id: creator
+    attributes:
+      label: Creator credit
+      description: The name or handle to credit on the page.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: Method
+      options:
+        - Hand-drawn or painted
+        - 3D render
+        - Photograph or photo composite
+        - AI-generated
+        - AI-assisted
+        - Mixed
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: tool
+    attributes:
+      label: Tools (optional)
+      description: Software, model or camera used.
+
+  - type: checkboxes
+    id: settings
+    attributes:
+      label: Setting
+      options:
+        - label: coastal
+        - label: highland
+        - label: interior
+        - label: sky
+        - label: exoplanet
+
+  - type: input
+    id: motifs
+    attributes:
+      label: Motifs
+      description: Comma-separated. Existing terms are listed on the gallery; new ones are fine.
+      placeholder: "dome, lattice, lagoon"
+
+  - type: input
+    id: file
+    attributes:
+      label: Image link
+      description: JPEG or PNG, at least 1600 px on the long edge, under 3 MB. Drag the file into a comment on this issue after opening it, or paste a link here.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Confirmation
+      options:
+        - label: I dedicate this work to the public domain under CC0 1.0 and have the right to do so.
+          required: true
+        - label: The work contains no copyrighted characters, logos, trademarks or other people's images.
+          required: true
+        - label: I have checked the work against the field guide checklist.
+          required: true
