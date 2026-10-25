@@ -1,14 +1,48 @@
 {% extends "base.html" %}
 {% block og_type %}article{% endblock og_type %}
 {% block body_class %}piece{% endblock body_class %}
-{% block jsonld_extra %},
+{% block jsonld_extra %}
+    {%- set jsrc = page.colocated_path ~ page.extra.image -%}
+    {%- set jmeta = get_image_metadata(path=jsrc) -%}
+    {%- set jthumb = resize_image(path=jsrc, width=800, op="fit_width", format="webp", quality=80) -%}
+    {%- set joriginal = get_url(path=jsrc) -%},
+    {
+      "@type": "ImageObject",
+      "@id": "{{ page.permalink }}#image",
+      "name": "{{ page.title }}",
+      "caption": "{{ page.title }}: {{ page.description | replace(from='"', to="'") | safe }}",
+      "description": "{{ page.description | replace(from='"', to="'") | safe }}",
+      "contentUrl": "{{ joriginal }}",
+      "url": "{{ joriginal }}",
+      "thumbnailUrl": "{{ jthumb.url }}",
+      "width": {{ jmeta.width }},
+      "height": {{ jmeta.height }},
+      "encodingFormat": "image/jpeg",
+      "representativeOfPage": true,
+      "creator": { "@type": "Person", "name": "{{ page.extra.creator }}" },
+      "creditText": "{{ page.extra.creator }}, {{ page.extra.method }}, CC0",
+      "copyrightNotice": "Dedicated to the public domain under CC0 1.0 by {{ page.extra.creator }}",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "acquireLicensePage": "{{ get_url(path="/about/", trailing_slash=true) }}#license",
+      "dateCreated": "{{ page.date | date(format="%Y-%m-%d") }}",
+      "keywords": "{{ page.taxonomies.settings | join(sep=", ") }}, {{ page.taxonomies.motifs | join(sep=", ") }}"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ page.permalink }}#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.base_url }}/" },
+        { "@type": "ListItem", "position": 2, "name": "Gallery", "item": "{{ get_url(path="/gallery/", trailing_slash=true) }}" },
+        { "@type": "ListItem", "position": 3, "name": "{{ page.title }}", "item": "{{ page.permalink }}" }
+      ]
+    },
     {
       "@type": "VisualArtwork",
       "@id": "{{ page.permalink }}#artwork",
       "name": "{{ page.title }}",
-      "description": "{{ page.description | default(value="") }}",
+      "description": "{{ page.description | replace(from='"', to="'") | safe }}",
       "url": "{{ page.permalink }}",
-      "image": "{{ get_url(path=page.colocated_path ~ page.extra.image) }}",
+      "image": { "@id": "{{ page.permalink }}#image" },
       "artform": "Digital image",
       "artMedium": "{{ page.extra.method }}",
       "creator": { "@type": "Person", "name": "{{ page.extra.creator }}" },

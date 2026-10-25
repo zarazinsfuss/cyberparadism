@@ -1,4 +1,15 @@
 {% extends "base.html" %}
+{% block robots %}noindex, follow, max-image-preview:large{% endblock robots %}
+{% block jsonld_extra %},
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ term.permalink }}#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.base_url }}/" },
+        { "@type": "ListItem", "position": 2, "name": "Gallery", "item": "{{ get_url(path="/gallery/", trailing_slash=true) }}" },
+        { "@type": "ListItem", "position": 3, "name": "{{ term.name | title }}", "item": "{{ term.permalink }}" }
+      ]
+    }{% endblock jsonld_extra %}
 {% block body_class %}taxonomy{% endblock body_class %}
 {% block body %}
 {%- set single = taxonomy.name | replace(from="settings", to="setting") | replace(from="motifs", to="motif") -%}
@@ -11,7 +22,7 @@
   </header>
   <div class="filter-row" role="navigation" aria-label="Browse by {{ taxonomy.name }}" style="margin-top: 2rem">
     <span class="label">{{ single }}</span>
-    <a class="chip" href="{{ get_url(path="/gallery/") }}">All</a>
+    <a class="chip" href="{{ get_url(path="/gallery/", trailing_slash=true) }}">All</a>
     {% for t in all_terms.items %}<a class="chip" href="{{ t.permalink }}"{% if t.name == term.name %} aria-current="page"{% endif %}>{{ t.name }} <span class="count">{{ t.pages | length }}</span></a>{% endfor %}
   </div>
   <ul class="pieces">

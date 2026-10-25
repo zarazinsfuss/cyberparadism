@@ -9,9 +9,9 @@
         <h2>Explore</h2>
         <ul>
           {% for item in config.extra.nav %}
-          <li><a href="{{ get_url(path=item.url) }}">{{ item.name }}</a></li>
+          <li><a href="{{ get_url(path=item.url, trailing_slash=true) }}">{{ item.name }}</a></li>
           {% endfor %}
-          <li><a href="{{ get_url(path="/about/") }}">About</a></li>
+          <li><a href="{{ get_url(path="/about/", trailing_slash=true) }}">About</a></li>
         </ul>
       </div>
       <div>

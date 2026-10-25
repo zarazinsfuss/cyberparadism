@@ -27,7 +27,7 @@
   <ul class="doors">
     {% for d in section.extra.doors %}
     <li>
-      <a class="door" href="{{ get_url(path=d.url) }}">
+      <a class="door" href="{{ get_url(path=d.url, trailing_slash=true) }}">
         <span class="num">0{{ loop.index }}</span>
         <h2>{{ d.title }}</h2>
         <p>{{ d.text }}</p>
@@ -70,7 +70,7 @@
       <ul>
         <li><a href="https://github.com/zarazinsfuss/cyberparadism/issues/new?template=artwork-submission.yml" rel="noopener">Submit a piece to the gallery</a></li>
         <li><a href="https://github.com/zarazinsfuss/cyberparadism/issues/new?template=article-submission.yml" rel="noopener">Submit an essay</a></li>
-        <li><a href="{{ get_url(path="/contribute/") }}">Read the guidelines first</a></li>
+        <li><a href="{{ get_url(path="/contribute/", trailing_slash=true) }}">Read the guidelines first</a></li>
         <li><a href="{{ config.extra.repo_url }}" rel="noopener">Improve the site on GitHub</a></li>
       </ul>
     </div>

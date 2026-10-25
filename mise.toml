@@ -1,18 +1,25 @@
 [tools]
 zola = "latest"
 
+[tasks.llms]
+description = "Generate static/llms.txt and static/llms-full.txt from the content"
+run = "python3 scripts/build-llms.py"
+
 [tasks.build]
 description = "Build the Zola site into public/"
+depends = ["llms"]
 run = "zola build"
 
 [tasks.serve]
 description = "Serve the site locally with live reload"
+depends = ["llms"]
 run = "zola serve"
 
 [tasks.check]
 description = "Build and check internal and external links"
+depends = ["llms"]
 run = "zola check"
 
 [tasks.clean]
-description = "Remove build output and generated image derivatives"
-run = "rm -rf public static/processed_images"
+description = "Remove build output and generated files"
+run = "rm -rf public static/processed_images static/llms.txt static/llms-full.txt"

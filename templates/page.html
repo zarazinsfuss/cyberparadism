@@ -16,11 +16,54 @@
       "author": { "@type": "Person", "name": "{{ page.extra.author | default(value=config.author) }}" },
       "publisher": { "@id": "{{ config.base_url }}/#organization" },
       "mainEntityOfPage": { "@id": "{{ page.permalink }}#webpage" },
+      {% if page.extra.term %}"about": { "@id": "{{ page.permalink }}#term" },{% endif %}
       "wordCount": {{ page.word_count }},
       "inLanguage": "en-US",
       "isAccessibleForFree": true,
       "license": "https://creativecommons.org/publicdomain/zero/1.0/"
-    }{% endblock jsonld_extra %}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ page.permalink }}#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.base_url }}/" }
+        {%- set pos = 2 -%}
+        {%- for anc in page.ancestors -%}
+          {%- if anc != "_index.md" -%}
+            {%- set sec = get_section(path=anc) -%},
+        { "@type": "ListItem", "position": {{ pos }}, "name": "{{ sec.title }}", "item": "{{ sec.permalink }}" }
+            {%- set_global pos = pos + 1 -%}
+          {%- endif -%}
+        {%- endfor -%},
+        { "@type": "ListItem", "position": {{ pos }}, "name": "{{ page.title }}", "item": "{{ page.permalink }}" }
+      ]
+    }
+    {%- if page.extra.term %},
+    {
+      "@type": "DefinedTerm",
+      "@id": "{{ page.permalink }}#term",
+      "name": "{{ page.extra.term.name }}",
+      "alternateName": [{% for a in page.extra.term.alternate %}"{{ a }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+      "description": "{{ page.description | replace(from='"', to="'") | safe }}",
+      "url": "{{ page.permalink }}",
+      "inDefinedTermSet": { "@type": "DefinedTermSet", "name": "Cyberparadism Field Guide", "url": "{{ get_url(path="/field-guide/", trailing_slash=true) }}" }
+    }
+    {%- endif -%}
+    {%- if page.extra.terms %},
+    {
+      "@type": "DefinedTermSet",
+      "@id": "{{ page.permalink }}#terms",
+      "name": "{{ page.title }}: {{ config.title }}",
+      "url": "{{ page.permalink }}",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "hasDefinedTerm": [
+        {%- for t in page.extra.terms %}
+        { "@type": "DefinedTerm", "name": "{{ t.name | replace(from='"', to="'") | safe }}", "description": "{{ t.definition | replace(from='"', to="'") | safe }}", "inDefinedTermSet": { "@id": "{{ page.permalink }}#terms" } }{% if not loop.last %},{% endif %}
+        {%- endfor %}
+      ]
+    }
+    {%- endif -%}
+{% endblock jsonld_extra %}
 {% block body %}
 {%- set show_toc = page.extra.toc | default(value=true) -%}
 <article class="article wrap">
@@ -51,6 +94,11 @@
   <div class="article-grid">
     <div class="prose">
       {{ <render_body html={page.content} /> }}
+      {% if page.extra.terms %}
+      <dl class="terms">
+        {% for t in page.extra.terms %}<dt id="{{ t.name | slugify }}">{{ t.name }}</dt><dd>{{ t.definition }}</dd>{% endfor %}
+      </dl>
+      {% endif %}
     </div>
     {% if show_toc and page.toc %}
     <aside class="toc" aria-labelledby="toc-title">

@@ -5,6 +5,6 @@
 <section class="not-found wrap">
   {% include "partials/emblem.html" %}
   <h1>Nothing grows here yet.</h1>
-  <p>The page you asked for does not exist. Try the <a href="{{ get_url(path="/") }}">front page</a>, the <a href="{{ get_url(path="/field-guide/") }}">field guide</a> or the <a href="{{ get_url(path="/gallery/") }}">gallery</a>.</p>
+  <p>The page you asked for does not exist. Try the <a href="{{ get_url(path="/", trailing_slash=true) }}">front page</a>, the <a href="{{ get_url(path="/field-guide/", trailing_slash=true) }}">field guide</a> or the <a href="{{ get_url(path="/gallery/", trailing_slash=true) }}">gallery</a>.</p>
 </section>
 {% endblock body %}

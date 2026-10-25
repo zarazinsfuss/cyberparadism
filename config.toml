@@ -44,6 +44,7 @@ repo_url = "https://github.com/zarazinsfuss/cyberparadism"
 edit_base = "https://github.com/zarazinsfuss/cyberparadism/edit/main/content/"
 issues_url = "https://github.com/zarazinsfuss/cyberparadism/issues/new/choose"
 og_image = "img/og-default.jpg"
+og_image_alt = "The Dome Shore: hexagonal domes and cascading glass towers on a turquoise shore, AI-generated with OpenAI image tools."
 wiki_url = "https://personal-aesthetics.fandom.com/wiki/Cyberparadism"
 manifesto_repo = "https://github.com/zarazinsfuss/cyberparadism-manifesto"
 

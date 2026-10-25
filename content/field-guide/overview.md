@@ -9,6 +9,10 @@ aliases = ["/articles/what-is-cyberparadism/"]
 [extra]
 eyebrow = "Field guide · 01"
 cover_piece = "changi-interface"
+
+[extra.term]
+name = "Cyberparadism"
+alternate = ["Cyber Paradise", "Cybergenesis", "Neogenesis", "Neogenesism"]
 +++
 
 Cyberparadism is a **techno-optimist futuristic aesthetic** that juxtaposes **lush or dramatic natural environments** with a **small, highly advanced human habitat**: typically a "breakaway" settlement that uses sophisticated, often plausibly speculated technology to achieve comfort, resilience and a sense of paradise. It emerged in online aesthetics communities in the 2010s, with earlier precursors sometimes cited, and it is discussed primarily as a visual and narrative style rather than a formal political program.

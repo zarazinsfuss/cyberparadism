@@ -1,5 +1,7 @@
 public/
 static/processed_images/
+static/llms.txt
+static/llms-full.txt
 .DS_Store
 *.swp
 *~

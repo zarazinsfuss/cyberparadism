@@ -1,4 +1,13 @@
 {% extends "base.html" %}
+{% block jsonld_extra %},
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ section.permalink }}#breadcrumbs",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ config.base_url }}/" },
+        { "@type": "ListItem", "position": 2, "name": "{{ section.title }}", "item": "{{ section.permalink }}" }
+      ]
+    }{% endblock jsonld_extra %}
 {% block body_class %}section{% endblock body_class %}
 {% block body %}
 <article class="article wrap">

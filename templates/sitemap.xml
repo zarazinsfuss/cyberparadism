@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- set skip_articles = "/articles/" -%}
+{%- set skip_settings = "/settings/" -%}
+{%- set skip_motifs = "/motifs/" -%}
+{%- set settings_index = config.base_url ~ "/settings/" -%}
+{%- set motifs_index = config.base_url ~ "/motifs/" -%}
+{%- for e in entries -%}
+  {%- set p = e.permalink -%}
+  {%- set keep = true -%}
+  {%- if skip_articles in p -%}{%- set keep = false -%}{%- endif -%}
+  {%- if skip_settings in p and p != settings_index -%}{%- set keep = false -%}{%- endif -%}
+  {%- if skip_motifs in p and p != motifs_index -%}{%- set keep = false -%}{%- endif -%}
+  {%- if keep %}
+  <url>
+    <loc>{{ p | escape_xml | safe }}</loc>
+    {%- if e.updated %}
+    <lastmod>{{ e.updated }}</lastmod>
+    {%- endif %}
+  </url>
+  {%- endif -%}
+{%- endfor %}
+</urlset>

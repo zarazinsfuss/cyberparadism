@@ -41,6 +41,7 @@ The design follows the aesthetic it describes: the imagery is the wilderness, th
 - **Palette**: the ten colors from the [field guide](@/field-guide/palette.md). A day theme on platinum with teal accents, and a night theme on charcoal with aquamarine accents. The toggle in the header switches between them; the choice is remembered in your browser only.
 - **Type**: [Newsreader](https://github.com/productiontype/Newsreader) for reading and [Sora](https://github.com/sora-xor/sora-font) for labels, both under the SIL Open Font License and served from this site, with no third-party requests.
 - **Build**: [Zola](https://www.getzola.org/), a static site generator. Images are resized at build time from the originals in the repository; no scripts or trackers are loaded.
+- **Machine-readable**: a sitemap, an RSS feed, JSON-LD structured data on every page, and [llms.txt](/llms.txt) with [llms-full.txt](/llms-full.txt) so that AI tools can read the whole site as plain text.
 - **Hosting**: GitHub Pages, deployed on every push to the main branch. The source is on [GitHub](https://github.com/zarazinsfuss/cyberparadism), and every page has an edit link at the bottom.
 
 ## License
