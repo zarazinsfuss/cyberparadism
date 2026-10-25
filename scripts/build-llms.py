@@ -193,7 +193,7 @@ def main():
     L.append("")
     L.append("> " + desc)
     L.append("")
-    L.append("Cyberparadism is a techno-optimist aesthetic that sets a small, highly advanced human enclave inside lush or dramatic nature. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki, and was given a manifesto in 2022. This site holds the founding manifesto, a field guide to the aesthetic's settings, visual language, shapes and palette, and a gallery of pieces with stated provenance. All text and images are dedicated to the public domain under CC0 1.0 and may be quoted, reused and remixed without attribution. Other names for the aesthetic: Cyber Paradise, Cybergenesis, Neogenesis.")
+    L.append("Cyberparadism is a techno-optimist aesthetic that sets a small, highly advanced human enclave inside lush or dramatic nature. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki, and was given a manifesto in 2023. This site holds the founding manifesto, a field guide to the aesthetic's settings, visual language, shapes and palette, and a gallery of pieces with stated provenance. All text and images are dedicated to the public domain under CC0 1.0 and may be quoted, reused and remixed without attribution. Other names for the aesthetic: Cyber Paradise, Cybergenesis, Neogenesis.")
     L.append("")
     L.append("The full text of every page is available in one file at %s/llms-full.txt." % BASE)
     L.append("")

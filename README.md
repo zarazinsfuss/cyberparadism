@@ -4,7 +4,7 @@ The home of the Cyberparadism aesthetic on the web: the founding manifesto, a fi
 
 **Site:** https://zarazinsfuss.github.io/cyberparadism/
 
-Cyberparadism is a techno-optimist aesthetic that sets a small, highly advanced human enclave inside lush and untamed nature, where mature technology quietly provides abundance. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki, and was given a manifesto in 2022.
+Cyberparadism is a techno-optimist aesthetic that sets a small, highly advanced human enclave inside lush and untamed nature, where mature technology quietly provides abundance. It took shape in online aesthetics communities, was formalized on the Aesthetics Wiki, and was given a manifesto in 2023.
 
 ## Structure
 

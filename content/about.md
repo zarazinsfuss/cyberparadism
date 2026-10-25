@@ -20,7 +20,7 @@ The aesthetic is also called **Cyber Paradise**, **Cybergenesis** and **Neogenes
 | When | What |
 |---|---|
 | 2010s | The aesthetic takes shape in online aesthetics communities and is formalized as an entry on the Aesthetics Wiki. |
-| January 2022 | The [Cyberparadism Manifesto](https://github.com/zarazinsfuss/cyberparadism-manifesto) is published on GitHub. |
+| April 2023 | The [Cyberparadism Manifesto](https://github.com/zarazinsfuss/cyberparadism-manifesto) is published on GitHub; the eight Laws and the Signs follow in May, the resources section in November. |
 | January 2024 | The first version of this website goes live. |
 | December 2025 | The site is rebuilt with Zola; the gallery and the first encyclopedic article are added. |
 | October 2026 | Relaunch: a new design that follows the aesthetic's own palette and shape language, the field guide, and a gallery with per-piece provenance. |

@@ -1,18 +1,18 @@
 +++
 title = "Cyberparadism Manifesto"
 description = "The founding text of the Cyberparadism aesthetic: its principles, the eight Laws, and the Signs that point toward a cyberparadise."
-date = 2022-01-19
+date = 2023-04-02
 updated = 2026-10-25
 aliases = ["/articles/manifesto/"]
 
 [extra]
-eyebrow = "Founding document · 2022"
+eyebrow = "Founding document · 2023"
 author = "zarazinsfuss"
 cover_piece = "the-torus-terrace"
 +++
 
 {% <note> %}
-**About this text.** The manifesto was first published on 19 January 2022 in the [cyberparadism-manifesto repository](https://github.com/zarazinsfuss/cyberparadism-manifesto). It is reproduced here with light copyediting for the 2026 relaunch. The principles, the Laws and the Signs are unchanged in substance. The original repository also holds the banner art that accompanied the first edition.
+**About this text.** The manifesto was first published on GitHub in April 2023 in the [cyberparadism-manifesto repository](https://github.com/zarazinsfuss/cyberparadism-manifesto); the eight Laws and the Signs were added in May 2023 and the resources section in November 2023. It is reproduced here with light copyediting for the 2026 relaunch. The principles, the Laws and the Signs are unchanged in substance. The original repository also holds the banner art that accompanied the first edition.
 {% </note> %}
 
 This is the web manifesto of the Cyberparadism aesthetic. Cyberparadism originated on the [Aesthetics Wiki](https://personal-aesthetics.fandom.com/wiki/Cyberparadism), where it was formalized for the first time, and it celebrates the positive potential of technology and scientific progress to create a better future for humanity. At its core, Cyberparadism is about using technology to enhance the human experience, promote sustainability, and foster a sense of collective purpose and responsibility.
